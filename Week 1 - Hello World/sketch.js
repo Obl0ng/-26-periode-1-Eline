@@ -1,16 +1,26 @@
+let image1
 function setup() {
   createCanvas(600, 600);
 }
 
 function draw() {
   background(220);
-  // Mijn naam
-  stroke(0);
+
+  // Nummers
   text("1.", 25, 20);
+  text("2.", 25, 60);
+  text("3.", 25, 120);
+  text("4.", 25, 200);
+  text("5.", 25, 380);
+  text("6.", 250, 20);
+  text("7.", 250, 120);
+  text("8.", 250, 360);
+
+  // Mijn naam
+  noStroke();
   text("Eline Frinks", 40, 20);
 
   // de vlag
-  text("2.", 25, 60);
   fill(255, 0, 0);  
   rect(40, 50, 60, 20);
   fill(255, 255, 255)
@@ -19,9 +29,8 @@ function draw() {
   rect(40, 70, 60, 10);
   fill(0, 0, 0);
 
-
   // Schaakbord
-  text("3.", 25, 120);
+  stroke(1);
   fill(255, 255, 255);
   rect(40, 110, 25, 25);
   fill(0, 0, 0);
@@ -43,7 +52,6 @@ function draw() {
   fill(0, 0, 0,);
   
   // Een huis
-  text("4.", 25, 240);
   fill(220, 220, 220);
   triangle(40, 280, 100, 280, 70, 230);
   fill(220, 220, 220);
@@ -51,7 +59,6 @@ function draw() {
   fill(0, 0, 0);
 
   // Verkeerslicht
-  text("5.", 25, 380);
   fill(0, 0, 0);
   rect(40, 390, 35, 80);
   fill(0, 0, 0);
@@ -65,7 +72,7 @@ function draw() {
   fill(0, 0, 0);
 
   // Dobbelsteen
-  text("6.", 250, 20);
+  strokeWeight(3);
   fill(255, 255, 255);
   rect(270, 10, 70, 70, 10);
   fill(0, 0, 0);
@@ -78,7 +85,6 @@ function draw() {
 
   // Mario met naam
   noStroke();
-  text("7.", 250, 120);
   text("Mario", 270, 120);
 
   fill("red");
@@ -107,8 +113,7 @@ function draw() {
   rect(360, 235, 10, 10);
   rect(370, 225, 20, 30);
   rect(270, 225, 20, 30);
-  rect(290, 230, 10, 10);
-
+  rect(290, 235, 10, 10);
 
   fill("brown");
   rect(290, 145, 30, 10);
@@ -126,9 +131,28 @@ function draw() {
   rect(310, 195, 10, 30);
   rect(310, 215, 40, 40);
   rect(340, 205, 10, 10);
+  rect(350, 225, 10, 35);
+  rect(340, 245, 30, 20);
+  rect(290, 245, 30, 20);
+  rect(300, 225, 10, 20);
 
   fill("yellow");
   rect(310, 225, 10, 10);
   rect(340, 225, 10, 10);
 
+  fill("brown");
+  rect(280, 265, 30, 20);
+  rect(270, 275, 10, 10);
+  rect(350, 265, 30, 20);
+  rect(380, 275, 10, 10);
+
+  fill("black");
+
+  // The Knight
+  text("The Knight", 270, 360);
+  image(image1, 170, 290, 360, 400);
+}
+
+  function preload() {
+  image1= loadImage("hollow-knight.png");
 }
