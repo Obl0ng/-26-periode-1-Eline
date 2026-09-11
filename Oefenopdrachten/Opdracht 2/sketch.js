@@ -16,8 +16,12 @@ function draw() {
   background(220);
   text(x, 20, 20);
   text(greeting, 20, 60);
-  text("optellen:" + (getal1 + getal2), 20, Ypositite = Ypositite + Ymargen);
-  text("aftrekken:" + (getal3 - getal2), 20, Ypositite = Ypositite + Ymargen);
-  text("vermenigvuldigen:" + (getal2 * getal1), 20, Ypositite = Ypositite + Ymargen);
-  text("delen:" + (getal2 / getal1), 20, Ypositite = Ypositite + Ymargen);
+  Ypositite = Ypositite + Ymargen;
+  text("optellen:" + (getal1 + getal2), 20, Ypositite);
+  Ypositite = Ypositite + Ymargen;
+  text("aftrekken:" + (getal3 - getal2), 20, Ypositite);
+  Ypositite = Ypositite + Ymargen;
+  text("vermenigvuldigen:" + (getal2 * getal1), 20, Ypositite);
+  Ypositite = Ypositite + Ymargen;
+  text("delen:" + (getal2 / getal1), 20, Ypositite);
 }
