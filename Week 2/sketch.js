@@ -1,3 +1,15 @@
+let sunspeed = 1;
+let sunx = 200;
+
+let cloudx1 = 300;
+let cloudspeed1 = 1.6;
+
+let cloudx2 = 400;
+let cloudspeed2 = 1.4;
+
+let cloudx3 = 700;
+let cloudspeed3 = 1.7;
+
 function setup() {
   createCanvas(800, 600);
 }
@@ -8,43 +20,39 @@ function draw() {
 
   // Zon
   fill("orange");
-  ellipse(200, 50, 90, 90);
+  ellipse(sunx, 50, 90, 90);
 
-   fill("yellow");
-  ellipse(200, 50, 70, 70);
+  fill("yellow");
+  ellipse(sunx, 50, 70, 70);
+  sunx = sunx + sunspeed;
+
+  if(sunx >= 850){
+  sunx = -50;
+  }
 
   // Wolk1
-  fill(210, 210, 210);
-  ellipse(201, 90, 60, 60);
-  ellipse(246, 85, 65, 65);
-  ellipse(291, 90, 60, 60);
+  drawwolk(cloudx1, 95);
+  cloudx1 = cloudx1 - cloudspeed1
 
-  fill("white");
-  ellipse(200, 100, 60, 60);
-  ellipse(245, 95, 65, 65);
-  ellipse(290, 100, 60, 60);
+  if(cloudx1 <= -50){
+  cloudx1 = 850;
+  }
 
   // Wolk2
-  fill(210, 210, 210);
-  ellipse(241, 130, 60, 60);
-  ellipse(286, 125, 65, 65);
-  ellipse(331, 130, 60, 60);
+  drawwolk(cloudx2, 120);
+  cloudx2 = cloudx2 - cloudspeed2
 
-  fill("white");
-  ellipse(240, 140, 60, 60);
-  ellipse(285, 135, 65, 65);
-  ellipse(330, 140, 60, 60);
+  if(cloudx2 <= -50){
+  cloudx2 = 950;
+  }
 
   // Wolk3
-  fill(210, 210, 210);
-  ellipse(551, 200, 60, 60);
-  ellipse(596, 195, 65, 65);
-  ellipse(641, 200, 60, 60);
+  drawwolk(cloudx3, 190);
+  cloudx3 = cloudx3 - cloudspeed3
 
-  fill("white");
-  ellipse(550, 210, 60, 60);
-  ellipse(595, 205, 65, 65);
-  ellipse(640, 210, 60, 60);
+  if(cloudx3 <= -50){
+  cloudx3 = 900;
+  }
 
   // Weg
   stroke(1);
@@ -86,11 +94,25 @@ function draw() {
   rect(670, 435, 5, 80, 10);
   rect(655, 360, 33, 80); 
   fill(90, 0, 0);
-  ellipse(672, 375, 23, 23);
+  circle(672, 375, 23, 23);
   fill(170, 100, 0);
-  ellipse(672, 400, 23, 23);
+  circle(672, 400, 23, 23);
   fill(0, 255, 0);
-  ellipse(672, 425, 23, 23);
+  circle(672, 425, 23, 23);
 
   // Auto
 }
+// wolk
+function drawwolk(xPos, yPos) {
+  fill(210, 210, 210);
+  ellipse(xPos - 90, yPos + 5, 60, 60);
+  ellipse(xPos - 45, yPos, 65, 65);
+  ellipse(xPos, yPos + 5, 60, 60);
+
+  fill("white");
+  ellipse(xPos - 91, yPos + 15, 60, 60);
+  ellipse(xPos - 46, yPos + 10, 65, 65);
+  ellipse(xPos - 1, yPos + 15, 60, 60);
+  //xPos = 291 yPos= 85
+}
+
