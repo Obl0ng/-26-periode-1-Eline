@@ -10,6 +10,17 @@ let cloudspeed2 = 1.4;
 let cloudx3 = 700;
 let cloudspeed3 = 1.7;
 
+
+let light = 0;
+function keyPressed() {
+  if (keyCode == ENTER) {
+    light = light + 1;
+    if (light > 2)
+      light = 0;
+ }
+
+}
+
 function setup() {
   createCanvas(800, 600);
 }
@@ -92,16 +103,75 @@ function draw() {
   noStroke();
   fill(70, 70, 70);
   rect(670, 435, 5, 80, 10);
-  rect(655, 360, 33, 80); 
-  fill(90, 0, 0);
-  circle(672, 375, 23, 23);
-  fill(170, 100, 0);
-  circle(672, 400, 23, 23);
-  fill(0, 255, 0);
-  circle(672, 425, 23, 23);
+  rect(655, 360, 33, 80);
 
-  // Auto
+  // Rood
+  if(light == 0){
+  fill(225, 0, 0);
+  }
+  else {
+    fill(90, 0, 0);
+  }
+  circle(672, 375, 23, 23);
+
+  // Oranje
+if(light == 2){
+  fill(255, 100, 0);
+  }
+  else {
+    fill(170, 100, 0);
+  }
+  circle(672, 400, 23, 23);
+
+  // Groen
+  if(light == 1){
+  fill(0, 255, 0);
+  }
+  else {
+    fill(0, 55, 0);
+  }
+  circle(672, 425, 23, 23);
+  
+// Boom1
+fill(100, 50, 40);
+rect(70, 400, 10, 110, 10);
+fill(0, 230, 0);
+circle(75, 390, 70, 70);
+fill(0, 200, 0);
+circle(80, 400, 70, 70);
+fill("green");
+circle(70, 400, 65, 65);
+
+//boom2
+fill(100, 50, 40);
+rect(200, 400, 10, 110, 10);
+fill("green");
+circle(200, 400, 65, 65);
+
+//boom3
+fill(100, 50, 40);
+rect(300, 400, 10, 110, 10);
+fill("green");
+circle(300, 400, 65, 65);
+
+//boom4
+fill(100, 50, 40);
+rect(500, 400, 10, 110, 10);
+fill("green");
+circle(500, 400, 65, 65);
+
+//Auto1
+
+
+//boom5
+fill(100, 50, 40);
+rect(400, 550, 10, 110, 10);
+fill("green");
+circle(400, 550, 65, 65);
+
+
 }
+
 // wolk
 function drawwolk(xPos, yPos) {
   fill(210, 210, 210);
