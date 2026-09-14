@@ -60,19 +60,37 @@ function draw() {
   rect(480, 550, 100, 8, 10); 
   rect(600, 550, 100, 8, 10); 
   rect(720, 550, 100, 8, 10); 
+
+  // Gras
+  noStroke();
   fill("green");
+  rect(0, 500, 800, 10);
   
-
-
   // Berg1
   strokeWeight(1);
   stroke(0, 0, 0);
-  fill(130, 130, 130); 
-  triangle(900, 500, 500, 500, 680, 350);
+  fill(100, 100, 100);
+  triangle(600, 500, 300, 500, 450, 250); 
   
   // Berg2 
-  fill(140, 140, 140);
+  fill(130, 130, 130);
+  stroke(0, 0, 0);
+  triangle(900, 500, 500, 500, 680, 350);
 
+  // Berg3
+  triangle(400, 500, 150, 500, 280, 320);
 
-  
+  // Verkeerslicht
+  noStroke();
+  fill(70, 70, 70);
+  rect(670, 435, 5, 80, 10);
+  rect(655, 360, 33, 80); 
+  fill(90, 0, 0);
+  ellipse(672, 375, 23, 23);
+  fill(170, 100, 0);
+  ellipse(672, 400, 23, 23);
+  fill(0, 255, 0);
+  ellipse(672, 425, 23, 23);
+
+  // Auto
 }
