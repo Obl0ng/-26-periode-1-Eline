@@ -1,14 +1,18 @@
-let sunspeed = 1;
+let sunspeed = 0.5;
 let sunx = 200;
 
 let cloudx1 = 300;
-let cloudspeed1 = 1.6;
+let cloudspeed1 = 0.6;
 
 let cloudx2 = 400;
-let cloudspeed2 = 1.4;
+let cloudspeed2 = 0.5;
 
 let cloudx3 = 700;
-let cloudspeed3 = 1.7;
+let cloudspeed3 = 0.7;
+
+let carx = -195;
+let carSpeed = 2;
+
 
 
 let light = 0;
@@ -29,6 +33,8 @@ function draw() {
   background("lightblue");
   noStroke();
 
+
+  
   // Zon
   fill("orange");
   ellipse(sunx, 50, 90, 90);
@@ -133,46 +139,59 @@ if(light == 2){
   circle(672, 425, 23, 23);
   
 // Boom1
-fill(100, 50, 40);
-rect(70, 400, 10, 110, 10);
-fill(0, 230, 0);
-circle(75, 390, 70, 70);
-fill(0, 200, 0);
-circle(80, 400, 70, 70);
-fill("green");
-circle(70, 400, 65, 65);
+  Drawboom(70, 400);
 
-//boom2
-fill(100, 50, 40);
-rect(200, 400, 10, 110, 10);
-fill("green");
-circle(200, 400, 65, 65);
 
-//boom3
-fill(100, 50, 40);
-rect(300, 400, 10, 110, 10);
-fill("green");
-circle(300, 400, 65, 65);
+// Boom2
+  Drawboom(200, 400);
 
-//boom4
-fill(100, 50, 40);
-rect(500, 400, 10, 110, 10);
-fill("green");
-circle(500, 400, 65, 65);
+// Boom3
+  Drawboom(300, 400);
+
+// Boom4
+  Drawboom(500, 400);
 
 //Auto1
+  drawauto(carx, 410);
+  carx = carx + carSpeed
+
+  if(carx >= 850){
+  carx = -100;
+  }
 
 
-//boom5
-fill(100, 50, 40);
-rect(400, 550, 10, 110, 10);
-fill("green");
-circle(400, 550, 65, 65);
 
-
+// Boom5
+  Drawboom(400, 520);
 }
 
-// wolk
+function drawauto(xPos, yPos) {
+  fill(255, 0, 255);
+  rect(xPos + 75, yPos + 85, 80, 80, 10);
+  rect(xPos + 140, yPos + 125, 40, 40, 10);
+  fill("black");
+  circle(xPos + 55, yPos, 30);
+  circle(xPos, yPos, 30);
+  //xPos = 175 yPos = 570
+}
+
+// Bomen
+function Drawboom(xPos, yPos) {
+  let leafx1 = xPos + Math.sin(frameCount * 0.04) * 3;
+  let leafx2 = xPos + Math.sin(frameCount * -0.04) * 3;
+  let leafx3 = xPos + Math.sin(frameCount * 0.04) * 3;
+  fill(100, 50, 40);
+  rect(xPos, yPos, 10, 110, 10);
+  fill(0, 230, 0);
+  circle(leafx3 - 10, yPos - 10, 70, 70);
+  fill(0, 200, 0);
+  circle(leafx2 - 10, yPos, 70, 70);
+  fill("green");
+  circle(leafx1, yPos, 65, 65);
+  //xPos = 70 yPos = 400
+}
+
+// Wolken
 function drawwolk(xPos, yPos) {
   fill(210, 210, 210);
   ellipse(xPos - 90, yPos + 5, 60, 60);
