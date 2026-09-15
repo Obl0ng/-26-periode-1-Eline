@@ -10,9 +10,11 @@ let cloudspeed2 = 0.5;
 let cloudx3 = 700;
 let cloudspeed3 = 0.7;
 
-let carx = -195;
+let carx = -200;
 let carSpeed = 2;
 
+let carx2 = -550;
+let carSpeed2 = 2;
 
 
 let light = 0;
@@ -150,29 +152,71 @@ if(light == 2){
 
 // Boom4
   Drawboom(500, 400);
+  
+//Auto2
+drawauto2(carx2, 410);
+carx2 = carx2 + carSpeed2
 
-//Auto1
+if(carx2 >= 900){
+  carx2 = -250;
+  }
+  if (carx2 == 610 && light == 0){
+    carSpeed2 = 0
+  }
+  if (carx2 == 510 && light == 2){
+    carSpeed2 = 1
+  }
+  if (light == 1){
+    carSpeed2 = 2
+  }
+  if (carx2 == 650 && light == 2){
+    carSpeed2 = 2
+  }
+
+  //Auto1
   drawauto(carx, 410);
   carx = carx + carSpeed
 
-  if(carx >= 850){
-  carx = -100;
+  if(carx >= 800){
+  carx = -250;
   }
-
-
+  if (carx == 450 && light == 0){
+    carSpeed = 0
+  }
+  if (carx == 350 && light == 2){
+    carSpeed = 1
+  }
+  if (light == 1){
+    carSpeed = 2
+  }
+  if (carx == 550 && light == 2){
+    carSpeed = 2
+  }
 
 // Boom5
   Drawboom(400, 520);
 }
 
+// Auto1
 function drawauto(xPos, yPos) {
   fill(255, 0, 255);
   rect(xPos + 75, yPos + 85, 80, 80, 10);
   rect(xPos + 140, yPos + 125, 40, 40, 10);
   fill("black");
-  circle(xPos + 55, yPos, 30);
-  circle(xPos, yPos, 30);
+  circle(xPos + 160, yPos + 165, 30);
+  circle(xPos + 95, yPos + 165, 30);
   //xPos = 175 yPos = 570
+}
+
+// Auto2
+function drawauto2(xPos, yPos) {
+  fill(255, 0, 0);
+  rect(xPos - 85, yPos + 40, 80, 80, 10);
+  rect(xPos - 20, yPos + 80, 40, 40, 10);
+  fill("black");
+  circle(xPos, yPos + 120, 30);
+  circle(xPos - 65, yPos + 120, 30);
+  //xPos = 260 yPos = 575
 }
 
 // Bomen
