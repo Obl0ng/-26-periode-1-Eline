@@ -1,4 +1,4 @@
-let teller = 0;
+let number = 0;
 let light = 0;
 
 function keyPressed() {
@@ -68,6 +68,8 @@ function draw() {
     fill(0, 55, 0);
   }
   circle(37, 305, 23, 23);
+
+  
 
 }
 

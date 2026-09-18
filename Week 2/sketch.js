@@ -16,15 +16,17 @@ let carSpeed = 2;
 let carx2 = -550;
 let carSpeed2 = 2;
 
+let Ufo = -200;
+let UfoSpeed = 10;
 
 let light = 0;
+
 function keyPressed() {
   if (keyCode == ENTER) {
     light = light + 1;
     if (light > 2)
       light = 0;
- }
-
+  }
 }
 
 function setup() {
@@ -35,8 +37,6 @@ function draw() {
   background("lightblue");
   noStroke();
 
-
-  
   // Zon
   fill("orange");
   ellipse(sunx, 50, 90, 90);
@@ -45,32 +45,41 @@ function draw() {
   ellipse(sunx, 50, 70, 70);
   sunx = sunx + sunspeed;
 
-  if(sunx >= 850){
-  sunx = -50;
+  if (sunx >= 850) {
+    sunx = -50;
+  }
+
+  // Ufo
+  DrawUfo(Ufo, 160);
+  Ufo = Ufo + UfoSpeed
+
+  if (Ufo >= 3000) {
+    Ufo = -50;
   }
 
   // Wolk1
+  noStroke();
   drawwolk(cloudx1, 95);
   cloudx1 = cloudx1 - cloudspeed1
 
-  if(cloudx1 <= -50){
-  cloudx1 = 850;
+  if (cloudx1 <= -50) {
+    cloudx1 = 850;
   }
 
   // Wolk2
   drawwolk(cloudx2, 120);
   cloudx2 = cloudx2 - cloudspeed2
 
-  if(cloudx2 <= -50){
-  cloudx2 = 950;
+  if (cloudx2 <= -50) {
+    cloudx2 = 950;
   }
 
   // Wolk3
   drawwolk(cloudx3, 190);
   cloudx3 = cloudx3 - cloudspeed3
 
-  if(cloudx3 <= -50){
-  cloudx3 = 900;
+  if (cloudx3 <= -50) {
+    cloudx3 = 900;
   }
 
   // Weg
@@ -82,23 +91,23 @@ function draw() {
   fill("white");
   rect(0, 550, 100, 8, 10);
   rect(120, 550, 100, 8, 10);
-  rect(240, 550, 100, 8, 10);  
+  rect(240, 550, 100, 8, 10);
   rect(360, 550, 100, 8, 10);
-  rect(480, 550, 100, 8, 10); 
-  rect(600, 550, 100, 8, 10); 
-  rect(720, 550, 100, 8, 10); 
+  rect(480, 550, 100, 8, 10);
+  rect(600, 550, 100, 8, 10);
+  rect(720, 550, 100, 8, 10);
 
   // Gras
   noStroke();
   fill("green");
   rect(0, 500, 800, 10);
-  
+
   // Berg1
   strokeWeight(1);
   stroke(0, 0, 0);
   fill(100, 100, 100);
-  triangle(600, 500, 300, 500, 450, 250); 
-  
+  triangle(600, 500, 300, 500, 450, 250);
+
   // Berg2 
   fill(130, 130, 130);
   stroke(0, 0, 0);
@@ -114,8 +123,8 @@ function draw() {
   rect(655, 360, 33, 80);
 
   // Rood
-  if(light == 0){
-  fill(225, 0, 0);
+  if (light == 0) {
+    fill(225, 0, 0);
   }
   else {
     fill(90, 0, 0);
@@ -123,8 +132,8 @@ function draw() {
   circle(672, 375, 23, 23);
 
   // Oranje
-if(light == 2){
-  fill(255, 100, 0);
+  if (light == 2) {
+    fill(255, 100, 0);
   }
   else {
     fill(170, 100, 0);
@@ -132,44 +141,43 @@ if(light == 2){
   circle(672, 400, 23, 23);
 
   // Groen
-  if(light == 1){
-  fill(0, 255, 0);
+  if (light == 1) {
+    fill(0, 255, 0);
   }
   else {
     fill(0, 55, 0);
   }
   circle(672, 425, 23, 23);
-  
-// Boom1
+
+  // Boom1
   Drawboom(70, 400);
 
-
-// Boom2
+  // Boom2
   Drawboom(200, 400);
 
-// Boom3
+  // Boom3
   Drawboom(300, 400);
 
-// Boom4
+  // Boom4
   Drawboom(500, 400);
-  
-//Auto2
-drawauto2(carx2, 410);
-carx2 = carx2 + carSpeed2
 
-if(carx2 >= 900){
-  carx2 = -250;
+  //Auto2
+  drawauto2(carx2, 410);
+  carx2 = carx2 + carSpeed2
+
+  if (carx2 >= 900) {
+    carx2 = -250;
   }
-  if (carx2 == 610 && light == 0){
+  if (carx2 == 610 && light == 0) {
     carSpeed2 = 0
   }
-  if (carx2 == 510 && light == 2){
+  if (carx2 == 510 && light == 2) {
     carSpeed2 = 1
   }
-  if (light == 1){
+  if (light == 1) {
     carSpeed2 = 2
   }
-  if (carx2 == 650 && light == 2){
+  if (carx2 == 650 && light == 2) {
     carSpeed2 = 2
   }
 
@@ -177,24 +185,41 @@ if(carx2 >= 900){
   drawauto(carx, 410);
   carx = carx + carSpeed
 
-  if(carx >= 800){
-  carx = -250;
+  if (carx >= 800) {
+    carx = -250;
   }
-  if (carx == 450 && light == 0){
+  if (carx == 450 && light == 0) {
     carSpeed = 0
   }
-  if (carx == 350 && light == 2){
+  if (carx == 350 && light == 2) {
     carSpeed = 1
   }
-  if (light == 1){
+  if (light == 1) {
     carSpeed = 2
   }
-  if (carx == 550 && light == 2){
+  if (carx == 550 && light == 2) {
     carSpeed = 2
   }
 
-// Boom5
+  // Boom5
   Drawboom(400, 520);
+
+}
+
+function DrawUfo(xPos, yPos) {
+  fill(230, 230, 230);
+  ellipse(xPos, yPos, 85, 60);
+  stroke(0, 0, 200);
+  fill(0, 0, 255);
+  ellipse(xPos - 45, yPos + 25, 50, 50);
+  ellipse(xPos + 45, yPos + 25, 50, 50);
+  noStroke();
+  rect(xPos - 42, yPos, 85, 50);
+  rect(xPos - 50, yPos, 100, 30);
+  stroke(0, 0, 70);
+  fill(0, 0, 170);
+  rect(xPos - 70, yPos + 23, 140, 5);
+  // xPos = 200 yPos = 200
 }
 
 // Auto1
@@ -248,4 +273,3 @@ function drawwolk(xPos, yPos) {
   ellipse(xPos - 1, yPos + 15, 60, 60);
   //xPos = 291 yPos= 85
 }
-
