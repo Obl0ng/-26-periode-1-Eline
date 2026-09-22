@@ -15,18 +15,20 @@ let linksOnder = 0;
 let middenOnder = 0;
 let rechtsOnder = 0;
 
+let winningB = false;
+let winningR = false;
+
+
 function mousePressed() {
   if (mouseButton == LEFT) {
     // beurten + vakjes + mousepotion
     if (mouseX >= 105 && mouseX <= 165 && mouseY >= 105 && mouseY <= 165 && linksBoven == 0) {
       turns = (turns + 1) % 2;
       linksBoven = turns + 1;
-      
     }
     if (mouseX >= 170 && mouseX <= 230 && mouseY >= 105 && mouseY <= 165 && middenBoven == 0) {
       turns = (turns + 1) % 2;
       middenBoven = turns + 1;
-      
     }
     if (mouseX >= 235 && mouseX <= 295 && mouseY >= 105 && mouseY <= 165 && rechtsBoven == 0) {
       turns = (turns + 1) % 2;
@@ -56,6 +58,66 @@ function mousePressed() {
       turns = (turns + 1) % 2;
       rechtsOnder = turns + 1;
     }
+    winB()
+    winR()
+  }
+}
+    // speler blauw
+function winB() {
+  if (winningB === false) {
+    if (linksBoven == middenBoven && middenBoven == rechtsBoven && linksBoven == 1) {
+      winningB = true
+    }
+    if (linksMidden == middenMidden && middenMidden == rechtsMidden && linksMidden == 1) {
+      winningB = true
+    }
+    if (linksOnder == middenOnder && middenOnder == rechtsOnder && linksOnder == 1) {
+      winningB = true
+    }
+    if (linksBoven == linksMidden && linksMidden == linksOnder && linksBoven == 1) {
+      winningB = true
+    }
+    if (middenBoven == middenMidden && middenMidden == middenOnder && middenBoven == 1) {
+      winningB = true
+    }
+    if (rechtsBoven == rechtsMidden && rechtsMidden == rechtsOnder && rechtsBoven == 1) {
+      winningB = true
+    }
+    if (linksBoven == middenMidden && middenMidden == rechtsOnder && linksBoven == 1) {
+      winningB = true
+    }
+    if (rechtsBoven == middenMidden && middenMidden == linksOnder && rechtsBoven == 1) {
+      winningB = true
+    }
+  }
+}
+    // speler rood
+function winR() {
+  if (winningR === false) {
+    if (linksBoven == middenBoven && middenBoven == rechtsBoven && linksBoven == 2) {
+      winningR = true
+    }
+    if (linksMidden == middenMidden && middenMidden == rechtsMidden && linksMidden == 2) {
+      winningR = true
+    }
+    if (linksOnder == middenOnder && middenOnder == rechtsOnder && linksOnder == 2) {
+      winningR= true
+    }
+    if (linksBoven == linksMidden && linksMidden == linksOnder && linksBoven == 2) {
+      winningR = true
+    }
+    if (middenBoven == middenMidden && middenMidden == middenOnder && middenBoven == 2) {
+      winningR = true
+    }
+    if (rechtsBoven == rechtsMidden && rechtsMidden == rechtsOnder && rechtsBoven == 2) {
+      winningR = true
+    }
+    if (linksBoven == middenMidden && middenMidden == rechtsOnder && linksBoven == 2) {
+      winningR = true
+    }
+    if (rechtsBoven == middenMidden && middenMidden == linksOnder && rechtsBoven == 2) {
+      winningR = true
+    }
   }
 }
 
@@ -65,6 +127,7 @@ function setup() {
 }
 
 function draw() {
+  console.log(winningB);
   // Achtergrond die veranderd
   if (turns == 0) {
     background("red");
@@ -85,6 +148,14 @@ function draw() {
     textSize(30);
     textFont(Crystal);
     text("blue's turn", 75, 70);
+  }
+
+  // achtergrond veranderd als iemand wint
+  if (winningB === true) {
+    background("blue")
+  }
+  if (winningR === true) {
+    background("red")
   }
 
   // Zwarte rechthoek
@@ -207,6 +278,34 @@ function draw() {
     fill("red");
   }
   rect(235, 235, 60, 60, 10);
+
+  // als blauw wint
+  if (winningB === true) {
+    fill("lightgreen");
+    stroke(6);
+    fill("green");
+    textSize(20);
+    textFont(Crystal);
+    text("BLUE WINS!", 60, 200);
+    noStroke();
+    fill("black");
+    textSize(15);
+    text("restart", 150, 350);
+  }
+
+  // als rood wint
+  if (winningR === true) {
+    fill("lightgreen");
+    stroke(6);
+    fill("green");
+    textSize(20);
+    textFont(Crystal);
+    text("RED WINS!", 80, 200);
+    noStroke();
+    fill("black");
+    textSize(15);
+    text("restart", 150, 350);
+  }
 
 
 }
