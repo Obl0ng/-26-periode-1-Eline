@@ -62,7 +62,7 @@ function mousePressed() {
     winR()
   }
 }
-    // speler blauw
+// speler blauw
 function winB() {
   if (winningB === false) {
     if (linksBoven == middenBoven && middenBoven == rechtsBoven && linksBoven == 1) {
@@ -91,7 +91,7 @@ function winB() {
     }
   }
 }
-    // speler rood
+// speler rood
 function winR() {
   if (winningR === false) {
     if (linksBoven == middenBoven && middenBoven == rechtsBoven && linksBoven == 2) {
@@ -101,7 +101,7 @@ function winR() {
       winningR = true
     }
     if (linksOnder == middenOnder && middenOnder == rechtsOnder && linksOnder == 2) {
-      winningR= true
+      winningR = true
     }
     if (linksBoven == linksMidden && linksMidden == linksOnder && linksBoven == 2) {
       winningR = true
@@ -120,6 +120,24 @@ function winR() {
     }
   }
 }
+
+// restart button
+function keyPressed() {
+  if (keyCode == 32) {
+    linksBoven = 0;
+    linksMidden = 0;
+    linksOnder = 0;
+    middenBoven = 0;
+    middenMidden = 0;
+    middenOnder = 0;
+    rechtsBoven = 0;
+    rechtsMidden = 0;
+    rechtsOnder = 0;
+    winningR = false;
+    winningB = false;
+  }
+}
+
 
 function setup() {
   createCanvas(400, 400);
@@ -289,8 +307,8 @@ function draw() {
     text("BLUE WINS!", 60, 200);
     noStroke();
     fill("black");
-    textSize(15);
-    text("restart", 150, 350);
+    textSize(10);
+    text("press space to restart", 105, 350);
   }
 
   // als rood wint
@@ -303,9 +321,7 @@ function draw() {
     text("RED WINS!", 80, 200);
     noStroke();
     fill("black");
-    textSize(15);
-    text("restart", 150, 350);
+    textSize(10);
+    text("press space to restart", 105, 350);
   }
-
-
 }
