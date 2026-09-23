@@ -17,7 +17,7 @@ let rechtsOnder = 0;
 
 let winningB = false;
 let winningR = false;
-
+let drawg = false;
 
 function mousePressed() {
   if (mouseButton == LEFT) {
@@ -62,6 +62,7 @@ function mousePressed() {
     winR()
   }
 }
+
 // speler blauw
 function winB() {
   if (winningB === false) {
@@ -146,6 +147,7 @@ function setup() {
 
 function draw() {
   console.log(winningB);
+  console.log(winningR);
   // Achtergrond die veranderd
   if (turns == 0) {
     background("red");
@@ -157,12 +159,14 @@ function draw() {
   // Text
   if (turns == 0) {
     fill("black");
+    noStroke();
     textSize(30);
     textFont(Crystal);
     text("red's turn", 75, 70);
   }
   if (turns == 1) {
     fill("black");
+    noStroke();
     textSize(30);
     textFont(Crystal);
     text("blue's turn", 75, 70);
@@ -180,10 +184,12 @@ function draw() {
   fill(0, 0, 0);
   rect(100, 100, 200, 200, 10);
 
-
   // Linksboven
   if (linksBoven == 0) {
     fill(200, 200, 200);
+  }
+  if (mouseX > 105 && mouseX < 165 && mouseY > 105 && mouseY < 165 && linksBoven == 0) {
+    fill(120, 120, 120);
   }
   else if (linksBoven == 1) {
     fill("blue");
@@ -198,6 +204,9 @@ function draw() {
   if (middenBoven == 0) {
     fill(200, 200, 200);
   }
+  if (mouseX > 170 && mouseX < 230 && mouseY > 105 && mouseY < 165 && middenBoven == 0) {
+    fill(120, 120, 120);
+  }
   else if (middenBoven == 1) {
     fill("blue");
   }
@@ -210,6 +219,9 @@ function draw() {
   // Rechtsboven
   if (rechtsBoven == 0) {
     fill(200, 200, 200);
+  }
+  if (mouseX > 235 && mouseX < 295 && mouseY > 105 && mouseY < 165 && rechtsBoven == 0) {
+    fill(120, 120, 120);
   }
   else if (rechtsBoven == 1) {
     fill("blue");
@@ -224,6 +236,9 @@ function draw() {
   if (linksMidden == 0) {
     fill(200, 200, 200);
   }
+  if (mouseX > 105 && mouseX < 165 && mouseY > 170 && mouseY < 230 && linksMidden == 0) {
+    fill(120, 120, 120);
+  }
   else if (linksMidden == 1) {
     fill("blue");
   }
@@ -236,6 +251,9 @@ function draw() {
   // Middenmidden
   if (middenMidden == 0) {
     fill(200, 200, 200);
+  }
+  if (mouseX > 170 && mouseX < 230 && mouseY > 170 && mouseY < 230 && middenMidden == 0) {
+    fill(120, 120, 120);
   }
   else if (middenMidden == 1) {
     fill("blue");
@@ -250,6 +268,9 @@ function draw() {
   if (rechtsMidden == 0) {
     fill(200, 200, 200);
   }
+  if (mouseX > 235 && mouseX < 295 && mouseY > 170 && mouseY < 230 && rechtsMidden == 0) {
+    fill(120, 120, 120);
+  }
   else if (rechtsMidden == 1) {
     fill("blue");
   }
@@ -262,6 +283,9 @@ function draw() {
   // Linksonder
   if (linksOnder == 0) {
     fill(200, 200, 200);
+  }
+  if (mouseX > 105 && mouseX < 165 && mouseY > 235 && mouseY < 295 && linksOnder == 0) {
+    fill(120, 120, 120);
   }
   else if (linksOnder == 1) {
     fill("blue");
@@ -276,6 +300,9 @@ function draw() {
   if (middenOnder == 0) {
     fill(200, 200, 200);
   }
+  if (mouseX > 170 && mouseX < 230 && mouseY > 235 && mouseY < 295 && middenOnder == 0) {
+    fill(120, 120, 120);
+  }
   else if (middenOnder == 1) {
     fill("blue");
   }
@@ -288,6 +315,9 @@ function draw() {
   // Rechtsonder
   if (rechtsOnder == 0) {
     fill(200, 200, 200);
+  }
+  if (mouseX > 235 && mouseX < 295 && mouseY > 235 && mouseY < 295 && rechtsOnder == 0) {
+    fill(120, 120, 120);
   }
   else if (rechtsOnder == 1) {
     fill("blue");
@@ -323,5 +353,19 @@ function draw() {
     fill("black");
     textSize(10);
     text("press space to restart", 105, 350);
+
+    if (drawg == true) {
+    fill("black");
+    textSize(10);
+    text("press space to restart", 105, 350);
+  }
+  }
+}
+
+function gelijkspel() {
+  if (linksBoven != 0 && middenBoven != 0 && rechtsBoven != 0 && linksMidden != 0 && middenMidden != 0
+    && rechtsMidden != 0 && linksOnder != 0 && middenOnder != 0 && rechtsOnder != 0 
+    && winningB && winningR) {
+    drawg == true;
   }
 }
