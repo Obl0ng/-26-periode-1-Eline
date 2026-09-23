@@ -60,6 +60,15 @@ function mousePressed() {
     }
     winB()
     winR()
+    gelijkspel()
+  }
+}
+
+function gelijkspel() {
+  if (linksBoven != 0 && middenBoven != 0 && rechtsBoven != 0 && linksMidden != 0 && middenMidden != 0
+    && rechtsMidden != 0 && linksOnder != 0 && middenOnder != 0 && rechtsOnder != 0
+    && winningB == false && winningR == false) {
+    drawg = true;
   }
 }
 
@@ -136,6 +145,7 @@ function keyPressed() {
     rechtsOnder = 0;
     winningR = false;
     winningB = false;
+    drawg = false;
   }
 }
 
@@ -146,9 +156,8 @@ function setup() {
 }
 
 function draw() {
-  console.log(winningB);
-  console.log(winningR);
   // Achtergrond die veranderd
+  background(220)
   if (turns == 0) {
     background("red");
   }
@@ -172,12 +181,15 @@ function draw() {
     text("blue's turn", 75, 70);
   }
 
-  // achtergrond veranderd als iemand wint
+  // achtergrond veranderd als iemand wint of draw
   if (winningB === true) {
     background("blue")
   }
   if (winningR === true) {
     background("red")
+  }
+  if (drawg === true) {
+    background("grey")
   }
 
   // Zwarte rechthoek
@@ -353,19 +365,19 @@ function draw() {
     fill("black");
     textSize(10);
     text("press space to restart", 105, 350);
-
-    if (drawg == true) {
+  }
+  if (drawg == true) {
+    fill("lightgreen");
+    stroke(6);
+    fill("green");
+    textSize(20);
+    textFont(Crystal);
+    text("DRAW!", 120, 200);
+    noStroke();
     fill("black");
     textSize(10);
     text("press space to restart", 105, 350);
   }
-  }
 }
 
-function gelijkspel() {
-  if (linksBoven != 0 && middenBoven != 0 && rechtsBoven != 0 && linksMidden != 0 && middenMidden != 0
-    && rechtsMidden != 0 && linksOnder != 0 && middenOnder != 0 && rechtsOnder != 0 
-    && winningB && winningR) {
-    drawg == true;
-  }
-}
+
