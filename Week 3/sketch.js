@@ -157,7 +157,6 @@ function setup() {
 
 function draw() {
   // Achtergrond die veranderd
-  background(220)
   if (turns == 0) {
     background("red");
   }
@@ -211,7 +210,6 @@ function draw() {
   }
   rect(105, 105, 60, 60, 10);
 
-
   // Middenboven
   if (middenBoven == 0) {
     fill(200, 200, 200);
@@ -226,7 +224,6 @@ function draw() {
     fill("red");
   }
   rect(170, 105, 60, 60, 10);
-
 
   // Rechtsboven
   if (rechtsBoven == 0) {
@@ -243,7 +240,6 @@ function draw() {
   }
   rect(235, 105, 60, 60, 10);
 
-
   // Linksmidden
   if (linksMidden == 0) {
     fill(200, 200, 200);
@@ -258,7 +254,6 @@ function draw() {
     fill("red");
   }
   rect(105, 170, 60, 60, 10);
-
 
   // Middenmidden
   if (middenMidden == 0) {
@@ -275,7 +270,6 @@ function draw() {
   }
   rect(170, 170, 60, 60, 10);
 
-
   // Rechtsmidden
   if (rechtsMidden == 0) {
     fill(200, 200, 200);
@@ -290,7 +284,6 @@ function draw() {
     fill("red");
   }
   rect(235, 170, 60, 60, 10);
-
 
   // Linksonder
   if (linksOnder == 0) {
@@ -307,7 +300,6 @@ function draw() {
   }
   rect(105, 235, 60, 60, 10);
 
-
   // Middenonder
   if (middenOnder == 0) {
     fill(200, 200, 200);
@@ -323,7 +315,6 @@ function draw() {
   }
   rect(170, 235, 60, 60, 10);
 
-
   // Rechtsonder
   if (rechtsOnder == 0) {
     fill(200, 200, 200);
@@ -338,6 +329,7 @@ function draw() {
     fill("red");
   }
   rect(235, 235, 60, 60, 10);
+
 
   // als blauw wint
   if (winningB === true) {
@@ -379,5 +371,3 @@ function draw() {
     text("press space to restart", 105, 350);
   }
 }
-
-
