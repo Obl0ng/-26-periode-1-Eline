@@ -19,7 +19,7 @@ let winningB = false;
 let winningR = false;
 let drawg = false;
 
-let mouseClick;
+let clickSound;
 
 function mousePressed() {
   if (mouseButton == LEFT) {
@@ -60,7 +60,7 @@ function mousePressed() {
       turns = (turns + 1) % 2;
       rechtsOnder = turns + 1;
     }
-    mouseClick.play()
+    clickSound.play();
     winB()
     winR()
     gelijkspel()
@@ -154,7 +154,8 @@ function keyPressed() {
 }
 
 function preload() {
-  mouseClick = loadSound(audley_fergine-ui-mouse-click-366460 (1).mp3);
+  clickSound = loadSound("audley_fergine-ui-mouse-click-366460 (1).mp3");
+  clickSound.play
 }
 
 // font
