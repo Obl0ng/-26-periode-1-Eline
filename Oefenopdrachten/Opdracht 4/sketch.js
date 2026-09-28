@@ -1,11 +1,10 @@
 let number = 0;
 let light = 0;
 
-function keyPressed() {
-  if (keyCode === SPACE) {
-  }
-}
+let score = 0;
 
+let Xball = 0;
+let Yball = 0;
 
 function keyPressed() {
   if (keyCode == ENTER) {
@@ -15,7 +14,6 @@ function keyPressed() {
   }
 }
 
-
 function setup() {
   createCanvas(400, 400);
 }
@@ -23,6 +21,7 @@ function setup() {
 function draw() {
   background(220);
 
+  textSize(10);
   // Blokje
   if (keyIsPressed === true) {
     if (keyCode === 66) { // B
@@ -30,12 +29,13 @@ function draw() {
       rect(20, 20, 60, 60);
     }
   }
-  
+
   // Nummers
   fill("black");
   text("1.", 10, 15);
   text("2.", 10, 100);
   text("3.", 10, 230);
+  text("4.", 200, 15);
 
   // Verkeerslicht
   fill(70, 70, 70);
@@ -69,8 +69,60 @@ function draw() {
   }
   circle(37, 305, 23, 23);
 
-  
 
+  // teller
+  score = score + 1;
+  fill(0);
+  text(score, 70, 140);
+  if (keyIsDown(32)) {
+    score = 0
+  }
+  if (score >= 500) {
+    score = 0
+  }
+
+  // 8ball, W = 87, A = 65, S = 83, D = 68
+  // eight ball
+noStroke();
+fill(0, 8, 9);
+circle(Xball, Yball, 120);
+ 
+// White circle and the number eight
+fill(243, 247, 248);
+circle(Xball, Yball, 58);
+fill(0, 8, 9);
+textAlign(CENTER, CENTER);
+textSize(42);
+textStyle(BOLD);
+text('8', Xball, Yball + 1);
+textStyle(NORMAL);
+textAlign(LEFT, BASELINE);
+ 
+if(keyIsDown(UP_ARROW) || keyIsDown(87)) {
+  Yball = Yball - 1
+}
+if(keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+  Yball =  Yball + 1
+}
+if(keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+  Xball = Xball - 1
+}
+if(keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+  Xball = Xball + 1
+}
+if(Xball>= 850) {
+  Xball = -50
+}
+if(Xball<= -50) {
+  Xball = 850
+}
+if(Yball >= 470) {
+  Yball = -50
+}
+if(Yball <= -50) {
+  Yball = 470
 }
 
 
+
+}

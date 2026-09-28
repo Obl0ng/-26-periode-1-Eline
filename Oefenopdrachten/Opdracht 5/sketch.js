@@ -19,9 +19,10 @@ function draw() {
   // 10 blokjes op een rij
   for (let i = 0; i < 10; i++) {
     fill("white");
+    if(i == 8){
+      fill("blue");
+    }
     rect(20 + i * 50, 20, 50, 50);
-    fill("blue");
-    rect(320, 20, 50, 50);
   }
   // 5 blokjes onder elkaar
   for (let i = 0; i < 5; i++) {
@@ -53,7 +54,7 @@ function draw() {
   for (let i = 0; i < 10; i++) {
     strokeWeight(1);
     fill(color ? "red" : "white");
-    circle(480, 220, 250 - i * 25, 250);
+    circle(480, 220, 250 - i * 25);
     color = !color;
   }
   // Accordeon
@@ -64,7 +65,4 @@ function draw() {
     rect(626, 115 + i * 10, breedte, 10);
     color2 = !color2;
   }
-  
-  
-  
 }
