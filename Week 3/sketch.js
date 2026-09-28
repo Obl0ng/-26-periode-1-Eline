@@ -60,10 +60,10 @@ function mousePressed() {
       turns = (turns + 1) % 2;
       rechtsOnder = turns + 1;
     }
-    clickSound.play();
     winB()
     winR()
     gelijkspel()
+    clickSound.play();
   }
 }
 
@@ -153,6 +153,7 @@ function keyPressed() {
   }
 }
 
+// mouseclick
 function preload() {
   clickSound = loadSound("audley_fergine-ui-mouse-click-366460 (1).mp3");
   clickSound.play
