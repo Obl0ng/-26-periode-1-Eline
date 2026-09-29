@@ -10,7 +10,7 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  background(250);
 
   // nummers
   textSize(10);
@@ -27,6 +27,7 @@ function draw() {
 
   // 1. 5 kleuren en woorden onder elkaar
   let colors = ['red', 'green', 'blue', 'purple', 'yellow'];
+
   for (let i = 0; i < colors.length; i++) {
     fill(colors[i]);
     text(colors[i], 35, 15 + i * 10);
@@ -35,6 +36,7 @@ function draw() {
   //2. Array aanpassen
   colors.shift();
   colors.push('red');
+
   for (let i = 0; i < colors.length; i++) {
     fill(colors[i]);
     text(colors[i], 35, 100 + i * 10);
@@ -42,6 +44,7 @@ function draw() {
 
   // 3. Twee kleuren verwijderen
   colors.splice(1, 2);
+
   for (let i = 0; i < colors.length; i++) {
     fill(colors[i]);
     text(colors[i], 35, 190 + i * 10);
@@ -50,6 +53,7 @@ function draw() {
   // 4. Getallen filteren
   let numbers1 = [400, 240, 10, 490, 30, 60, 244, 500, 301, 300,];
   let lower300 = numbers1.filter(num => num < 300);
+
   for (let i = 0; i < lower300.length; i++) {
     fill(0);
     text(lower300[i], 35, 250 + i * 10);
@@ -59,6 +63,7 @@ function draw() {
   let numbers2 = [3, 55, 93, 20, 102, 6];
   let numbers3 = [14, 22, 80, 5];
   let total = 0;
+
   for (let i = 0; i < numbers2.length; i++) {
     total += (numbers2[i]);
   }
@@ -71,6 +76,7 @@ function draw() {
   // 6. Letters tellen
   let woord = 'Overheidsfinancieringstekort';
   let total2 = 0;
+
   for (let i = 0; i < woord.length; i++) {
     if (woord[i] == 'e') {
       total2 += 1;
@@ -81,6 +87,7 @@ function draw() {
   // 7. Alfabetische volgorde
   let colors2 = ['red', 'green', 'blue', 'purple', 'yellow'];
   colors2.sort();
+
   for (let i = 0; i < colors2.length; i++) {
     fill(colors2[i]);
     textSize(10);
@@ -96,6 +103,7 @@ function draw() {
   // 9. Random getallen en hun gemiddelde
   let numbers4 = [];
   let totaal = 0;
+
   for (let i = 0; i < 12; i++) {
     numbers4.push(round(random(0, 100)));
     totaal += numbers4[i];
@@ -103,8 +111,9 @@ function draw() {
     text(numbers4[i], 255, 15 + i * 10);
   }
   // Totaal en gemiddelde
-  let gemiddelde = totaal / 12;
+  let gemiddelde = round(totaal / 12);
   text("Totaal: " + totaal, 255, 140);
   text("Gemiddelde: " + gemiddelde, 255, 155);
 
+ 
 }
