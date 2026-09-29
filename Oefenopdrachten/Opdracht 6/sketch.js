@@ -1,7 +1,10 @@
-
+let kleuren = [];
 
 function setup() {
   createCanvas(380, 360);
+  for (let i = 0; i < 5; i++) {
+    kleuren.push([random(255), random(255), random(255)]);
+  }
 }
 
 function draw() {
@@ -78,25 +81,26 @@ function draw() {
   colors2.sort();
   for (let i = 0; i < colors2.length; i++) {
     fill(colors2[i]);
-  textSize(10);
-  text(colors2, 135, 190 + i * 10);
+    textSize(10);
+    text(colors2[i], 135, 190 + i * 10);
+  }
+
+  // 8. Random kleuren op een rij
+  for (let i = 0; i < 5; i++) {
+    fill(kleuren[i]);
+   rect(135 + i * 30, 273, 30, 30);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   }
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
