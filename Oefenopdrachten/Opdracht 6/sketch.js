@@ -94,10 +94,17 @@ function draw() {
   }
 
   // 9. Random getallen en hun gemiddelde
-  let numbers4 = [round(random(0, 100))];
+  let numbers4 = [];
+  let totaal = 0;
   for (let i = 0; i < 12; i++) {
+    numbers4.push(round(random(0, 100)));
+    totaal += numbers4[i];
     fill(0);
     text(numbers4[i], 255, 15 + i * 10);
   }
+  // Totaal en gemiddelde
+  let gemiddelde = totaal / 12;
+  text("Totaal: " + totaal, 255, 140);
+  text("Gemiddelde: " + gemiddelde, 255, 155);
 
 }
