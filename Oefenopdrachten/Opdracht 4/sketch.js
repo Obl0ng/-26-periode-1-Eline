@@ -3,8 +3,8 @@ let light = 0;
 
 let score = 0;
 
-let Xball = 0;
-let Yball = 0;
+let Xball = 250;
+let Yball = 100;
 
 function keyPressed() {
   if (keyCode == ENTER) {
@@ -82,47 +82,42 @@ function draw() {
   }
 
   // 8ball, W = 87, A = 65, S = 83, D = 68
-  // eight ball
-noStroke();
-fill(0, 8, 9);
-circle(Xball, Yball, 120);
- 
-// White circle and the number eight
-fill(243, 247, 248);
-circle(Xball, Yball, 58);
-fill(0, 8, 9);
-textAlign(CENTER, CENTER);
-textSize(42);
-textStyle(BOLD);
-text('8', Xball, Yball + 1);
-textStyle(NORMAL);
-textAlign(LEFT, BASELINE);
- 
-if(keyIsDown(UP_ARROW) || keyIsDown(87)) {
-  Yball = Yball - 1
-}
-if(keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
-  Yball =  Yball + 1
-}
-if(keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-  Xball = Xball - 1
-}
-if(keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-  Xball = Xball + 1
-}
-if(Xball>= 850) {
-  Xball = -50
-}
-if(Xball<= -50) {
-  Xball = 850
-}
-if(Yball >= 470) {
-  Yball = -50
-}
-if(Yball <= -50) {
-  Yball = 470
-}
+  noStroke();
+  fill(0, 8, 9);
+  circle(Xball, Yball, 120);
 
+  // 8B
+  fill(243, 247, 248);
+  circle(Xball, Yball, 58);
+  fill(0, 8, 9);
+  textAlign(CENTER, CENTER);
+  textSize(42);
+  textStyle(BOLD);
+  text('8', Xball, Yball + 1);
 
-
+  if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
+    Yball = Yball - 2
+  }
+  if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
+    Yball = Yball + 2
+  }
+  if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+    Xball = Xball - 2
+  }
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+    Xball = Xball + 2
+  }
+  if (Xball >= 500) {
+    Xball = -100;
+  }
+  if (Xball <= -100) {
+    Xball = 500;
+  }
+  if (Yball >= 500) {
+    Yball = -60;
+  }
+  if (Yball <= -60) {
+    Yball = 500;
+  }
+  
 }
