@@ -8,7 +8,9 @@ function draw() {
   background(220);
 
   let colors = ['red', 'green', 'blue', 'purple', 'yellow'];
-  let letters = ['400', '240', '10', '490', '30', '60', '244', '500', '301', '300',];
+  let numbers = ['400', '240', '10', '490', '30', '60', '244', '500', '301', '300',];
+  let numbers2 = ['3', '55', '93', '20', '102', '6'];
+  let numbers3 = ['14', '22', '80', '5'];
 
   // nummers
   fill(0);
@@ -44,10 +46,15 @@ function draw() {
   }
 
   // 4. Getallen filteren
-  for (let i = 0; i < letters.length; i++) {
-    if (letters < 300) {
-      text(letters[i], 35, 250);
-    }
+  let lower300 = numbers.filter(num => num < 300);
+  for (let i = 0; i < lower300.length; i++) {
+    fill(0);
+    text(lower300[i], 35, 250 + i * 10);
+  }
+
+  // 5. Meerdere arrays optellen
+  for (let i = numbers2.length; i + numbers3.length; i++) {
+    text(numbers2[i], 135, 15 + i * 10);
   }
 
 
