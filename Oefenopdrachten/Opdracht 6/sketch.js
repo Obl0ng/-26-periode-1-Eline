@@ -11,6 +11,8 @@ function draw() {
   let numbers = ['400', '240', '10', '490', '30', '60', '244', '500', '301', '300',];
   let numbers2 = ['3', '55', '93', '20', '102', '6'];
   let numbers3 = ['14', '22', '80', '5'];
+  let total = 0;
+
 
   // nummers
   fill(0);
@@ -53,9 +55,14 @@ function draw() {
   }
 
   // 5. Meerdere arrays optellen
-  for (let i = numbers2.length; i + numbers3.length; i++) {
-    text(numbers2[i], 135, 15 + i * 10);
+  for (let i = 0; i < numbers2.length; i++) {
+    total += Number(numbers2[i]);
   }
+  for (let i = 0; i < numbers3.length; i++) {
+  total += Number(numbers3[i]);
+  text(total, 135, 15);
+  }
+
 
 
 
