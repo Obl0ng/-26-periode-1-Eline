@@ -2,6 +2,8 @@ let kleuren = [];
 
 function setup() {
   createCanvas(380, 360);
+  frameRate(1);
+
   for (let i = 0; i < 5; i++) {
     kleuren.push([random(255), random(255), random(255)]);
   }
@@ -88,19 +90,14 @@ function draw() {
   // 8. Random kleuren op een rij
   for (let i = 0; i < 5; i++) {
     fill(kleuren[i]);
-   rect(135 + i * 30, 273, 30, 30);
+    rect(135 + i * 30, 273, 30, 30);
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
+  // 9. Random getallen en hun gemiddelde
+  let numbers4 = [round(random(0, 100))];
+  for (let i = 0; i < 12; i++) {
+    fill(0);
+    text(numbers4[i], 255, 15 + i * 10);
   }
+
+}
