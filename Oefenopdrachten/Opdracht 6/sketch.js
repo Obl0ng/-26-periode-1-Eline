@@ -5,7 +5,7 @@ function setup() {
   frameRate(1);
 
   for (let i = 0; i < 5; i++) {
-    kleuren.push([random(255), random(255), random(255)]);
+    kleuren.push([random(255), random(255), random(255)])
   }
 }
 
