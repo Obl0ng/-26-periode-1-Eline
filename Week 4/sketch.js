@@ -9,17 +9,18 @@ let positionRect = [];
 let positionCircle = [];
 let positionRuit = [];
 
-
 function setup() {
   createCanvas(800, 600);
 
   for (let i = 0; i < 6; i++) {
     kleuren.push([random(255), random(255), random(255)]);
 
+    // postities van vormen
     positionRect.push([random(0, 750), random(0, 500), 50, 50]);
     positionCircle.push([random(0, 800), random(0, 600), 50]);
     positionRuit.push([random(0, 800), random(0, 600), 50]);
 
+    // tellers van vormen
     tellersRect.push(random(0, 180));
     tellersCircle.push(random(0, 180));
     tellersRuit.push(random(0, 180));
@@ -28,7 +29,7 @@ function setup() {
 
 
 function draw() {
-  background(0);
+  background(201, 158, 224);
 
   for (let i = 0; i < 6; i++) {
     fill(kleuren[i]);
@@ -58,7 +59,7 @@ function draw() {
     rect(...positionRect[i]); // 
     circle(...positionCircle[i]);
 
-
+    // ruit vorm
     let x = positionRuit[i][0];
     let y = positionRuit[i][1];
     let grootte = positionRuit[i][2];
@@ -80,19 +81,25 @@ function draw() {
     }
 
     // cirkel onder scherm
-    if (positionCircle[i][1] > height) {
+    if (positionCircle[i][1] > 850) {
       positionCircle[i][0] = random(0, 750);
       positionCircle[i][1] = random(-100, 0);
 
-      tellersCircle[i] = random(60, 180);        
+      tellersCircle[i] = random(60, 180);
     }
 
     // ruit onder scherm
-    if (positionRuit[i][1] > height) {
+    if (positionRuit[i][1] > 850) {
       positionRuit[i][0] = random(0, 750);
       positionRuit[i][1] = random(-100, 0);
 
-      tellersRuit[i] = random(60, 180);
+      tellersRuit[i] = random(60, 120);
     }
+  }
+}
+
+function keyPressed() {
+  if (keyCode = 8) {
+    fill(kleuren[i]);
   }
 }
