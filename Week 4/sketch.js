@@ -16,8 +16,8 @@ function setup() {
     kleuren.push([random(255), random(255), random(255)]);
 
     // postities van vormen
-    positionRect.push([random(0, 750), random(0, 500), 50, 50]);
-    positionCircle.push([random(0, 800), random(0, 600), 50]);
+    positionRect.push([random(0, 750), random(0, 500), random(50, 80), random(50, 80)]);
+    positionCircle.push([random(0, 800), random(0, 600), random(30, 70)]);
     positionRuit.push([random(0, 800), random(0, 600), 50]);
 
     // tellers van vormen
@@ -94,12 +94,8 @@ function draw() {
       positionRuit[i][1] = random(-100, 0);
 
       tellersRuit[i] = random(60, 120);
-    }
-  }
-}
 
-function keyPressed() {
-  if (keyCode = 8) {
-    fill(kleuren[i]);
+
+    }
   }
 }
