@@ -94,8 +94,6 @@ function draw() {
       positionRuit[i][1] = random(-100, 0);
 
       tellersRuit[i] = random(60, 120);
-
-
     }
   }
 }
