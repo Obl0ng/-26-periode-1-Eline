@@ -18,6 +18,7 @@ function draw() {
 
     tekenText(200, 200);
 
+    // getallen
     text(optel(9, 10), 120, 270);
     text(delen(9, 10), 220, 270);
     text(keer(9, 10), 320, 270);
@@ -73,19 +74,23 @@ function tekenText(xPos, yPos) {
   // xPos = 200 yPos = 200
 }
 
+// optellen
 function optel(a, b) {
   textSize(15);
   return a + b;
 }
 
+// gedeeld door
 function delen(a, b) {
   return a / b;
 }
 
+// vermedigvuldigen
 function keer(a, b) {
   return a * b;
 }
 
+// aftrekken
 function min(a, b) {
   return a - b;
 }
