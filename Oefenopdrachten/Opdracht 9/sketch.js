@@ -57,9 +57,7 @@ function mousePressed() {
     let afstandToMuis = dist(mouseX, mouseY, cirkel2.x, cirkel2.y);
     if (afstandToMuis <= cirkel2.radius) {
       punten += 1;
+      cirkels.splice(i, 1);
     }
-  }
-  if (punten == true) {
-    cirkels = -500;
   }
 }
