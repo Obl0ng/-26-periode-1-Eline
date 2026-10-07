@@ -15,6 +15,8 @@ image(image2, -5, 350, 100, 250);
 image(image3, 770, 230, 120, 110);
 image(image4, 650, 523, 75, 75);
 image(image5, 50, 29, 70, 70);
+
+
 }
 
 function preload() {
