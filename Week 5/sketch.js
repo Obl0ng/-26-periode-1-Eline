@@ -1,28 +1,35 @@
-let image1
-let image2
-let image3
-let image4
-let image5
+let achtergrond = background(255);
+
 function setup() {
   createCanvas(900, 600);
+
+  let button = createButton("start"); // maakt alle buttons aan met de kleuren array
+  button.position(300, 300, 100, 100);
+  button.style('background', 'white'); // de achtergrond van de buttons komen toegevoegd
+  button.mousePressed(ButtonStartPressed);
+
+}
+
+function ButtonStartPressed() {
+
+  achtergrond = background(0);
+
+
+  if (ButtonStartPressed == true) {
+    button.hide(); // dan gaat de knop met de kleur waar je op klikt weg
+  }
+  else button.show(); // als je dan op een andere knop klikt komt de knop terug
+
 }
 
 function draw() {
-  background(0);
+  background(achtergrond);
 
-image(image1, 0, 0, 900, 600);
-image(image2, -5, 350, 100, 250);  
-image(image3, 770, 230, 120, 110);
-image(image4, 650, 523, 75, 75);
-image(image5, 50, 29, 70, 70);
+
 
 
 }
 
-function preload() {
-  image1 = loadImage("QuizLayout.jpg");
-  image2 = loadImage("Jinx.jpg");
-  image3 = loadImage("drawing1.jpg");
-  image4 = loadImage("Jinx&Vi.jpg");
-  image5 = loadImage("butterfly1.jpg");
-}
+
+
+
