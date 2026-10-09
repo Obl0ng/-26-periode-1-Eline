@@ -5,62 +5,75 @@ let image4;
 let image5;
 let image6;
 
-let quizscherm = 0;
+let arcaneFont
+
+let menuScherm = 0;
 let button;
 
 let answerButtons = [];
-
 let correctAnswer = 0;
 let currentQuestion = 0;
+let feedback = ""; // voor als je een antwoord goed of fout hebt
 
-let feedback = "";
-
-let questions = [
+let questions = [ // de vragen, antwoorden en goede antwoord
   {
-    question: "Who are the two siblings?",
+    question: "1. Who are the two siblings?",
     answers: ["Ekko and Jinx", "Violet and Powder", "Jinx and Isha", "Jayce and Viktor"],
     correctAnswer: 1
   },
   {
-    question: "Who created the magic?",
+    question: "2. Who created the magic?",
     answers: ["Jinx", "professor Heimerdinger", "Jayce", "Caitlyn"],
     correctAnswer: 2
   },
   {
-    question: "What's the name of Mel's mother?",
+    question: "3. What's the name of Mel's mother?",
     answers: ["Ambessa", "Amara", "Caitlyn", "Vi"],
     correctAnswer: 0
   },
   {
-    question: "Who gets in a relationship?",
+    question: "4. Who gets in a relationship?",
     answers: ["Ekko and Jinx", "Vi and Caitlyn", "Silco and Jinx", "Viktor and Jayce"],
     correctAnswer: 1
   },
   {
-    question: "Who's Vander?",
-    answers: [
-      "the father figure of Violet and Powder",
-      "a guy that sells objects",
-      "a Piltover enforcer",
-      "the father of Caitlyn"
-    ],
+    question: "5. Who's Vander?",
+    answers: ["the father figure of Violet and Powder", "a guy that sells objects", "a Piltover enforcer", "the father of Caitlyn"],
     correctAnswer: 0
   },
   {
-    question: "What's Hextech?",
-    answers: [
-      "the rich city's name",
-      "Jinx's shark gun",
-      "the name of Vanders bar",
-      "magic that Jayce created"
-    ],
+    question: "6. What's Hextech?",
+    answers: ["the rich city's name", "Jinx's shark gun", "the name of Vanders bar", "magic that Jayce created"],
     correctAnswer: 3
+  },
+  {
+    question: "7. What's the name of the person who took Powder?",
+    answers: ["Vi", "Jinx", "Professor Heimerdinger", "Silco"],
+    correctAnswer: 3
+  },
+  {
+    question: "8. What's the name of the drug that Silco made?",
+    answers: ["Piltover", "Zaun", "Shimmer", "Sevika"],
+    correctAnswer: 2
+  },
+  {
+    question: "9. Who is Felicia?",
+    answers: ["Powder and Violet's mother", "Vander's girlfriend", "Ekko's mother", "Silco's girlfriend"],
+    correctAnswer: 0
+  },
+  {
+    question: "10. Who killed Vander?",
+    answers: ["Jinx", "Vander", "Silco", "Jayce"],
+    correctAnswer: 1
   }
+
 ];
+
 
 function setup() {
   createCanvas(900, 600);
 
+  // start button
   button = createButton("Start Quiz");
   button.size(300, 100);
   button.position(300, 350);
@@ -70,31 +83,25 @@ function setup() {
   menu();
 }
 
+
 function StartButton() {
-  quizscherm += 1;
-  button.hide();
+  menuScherm += 1; // als je op start button klikt gaat de scherm naar volgende pagina
+  button.hide(); // dat gaat de start button weg
 
   makeAnswerButton();
 }
 
-function preload() {
-  image1 = loadImage("Jinx&Ekko.jpg");
-  image2 = loadImage("QuizLayout.jpg");
-  image3 = loadImage("Jinx.jpg");
-  image4 = loadImage("drawing1.jpg");
-  image5 = loadImage("Jinx&Vi.jpg");
-  image6 = loadImage("butterfly1.jpg");
-}
 
 function draw() {
-  if (quizscherm >= 1) {
-    QuizLayout();
+  if (menuScherm >= 1) {
+    QuizLayout(); // als de scherm naar de volgende pagina gaat komt de quizlayout te zien
   }
 
-  if (quizscherm >= 2) {
-    nextQuestion();
+  if (menuScherm >= 2) {
+    nextQuestion(); // deze function zit het eind scherm. Ik weet dat de naam onlogisch is
   }
 }
+
 
 function menu() {
   background(image1);
@@ -103,9 +110,11 @@ function menu() {
   rect(180, 155, 520, 310, 20);
 
   fill(255);
-  textSize(40);
-  text("Arcane quiz", 330, 200);
+  textSize(80);
+  textFont(arcaneFont);
+  text("Arcane quiz", 230, 270);
 }
+
 
 function QuizLayout() {
   background(image2);
@@ -115,27 +124,23 @@ function QuizLayout() {
   image(image5, 650, 523, 75, 75);
   image(image6, 50, 29, 70, 70);
 
-  fill(255);
-  textSize(25);
-
   if (currentQuestion < questions.length) {
-    text(questions[currentQuestion].question, 300, 160);
-
-    // Feedback laten zien
-    text(feedback, 402, 305);
+    fill(255);
+    textSize(25);
+    textFont(arcaneFont);
+    textAlign('center');
+    text(questions[currentQuestion].question, 430, 160); // de text is de vraag van current vraag
+    text(feedback, 450, 305); // feedback laten zien
   }
 }
 
 
 function makeAnswerButton() {
   // De 4 antwoorden ophalen
-  let answers = questions[currentQuestion].answers;
-
-
+  let answers = questions[currentQuestion].answers; // de antwoorden van de current vraag van alle vragen
 
   for (let i = 0; i < answers.length; i++) {
-
-    let answerButton = createButton(answers[i]);
+    let answerButton = createButton(answers[i]); // de buttons van de 4 antwoorden array
     answerButton.size(150, 68);
 
     // Positie van de buttons
@@ -147,8 +152,9 @@ function makeAnswerButton() {
     answerButton.style('color', 'white');
     answerButton.style('border', 'none');
 
+
     // Controleren welk antwoord is aangeklikt
-    answerButton.mousePressed(function () {
+    answerButton.mousePressed(function () { // als je op een antwoord klikt dan checkt hij of het goed of fout is
       checkAnswer(i);
     });
 
@@ -158,14 +164,13 @@ function makeAnswerButton() {
 
 
 function checkAnswer(chosenAnswer) {
-  if (chosenAnswer == questions[currentQuestion].correctAnswer) {
+  if (chosenAnswer == questions[currentQuestion].correctAnswer) { // als het gekozen antwoord goed of fout is
     feedback = "Correct!";
   } else {
     feedback = "Wrong!";
   }
 
-  // Even wachten voordat de volgende vraag komt
-  setTimeout(nextQuestion, 1000);
+  setTimeout(nextQuestion, 1000); // wacht tijd voor de volgende vraag
 }
 
 
@@ -173,26 +178,39 @@ function nextQuestion() {
 
   currentQuestion++;
 
-  feedback = "";
+  feedback = ""; // zonder dit blijft de feedback vastlopen
 
-  if (currentQuestion < questions.length) {
+  if (currentQuestion < questions.length) { // dan komen de correcte antwoorden bij de current vraag
     makeAnswerButton();
   } else {
-    quizscherm += 1;
+    menuScherm += 1; // eind scherm komt
     background(image1);
-    text("You finished the quiz!", 330, 300);
+    textAlign('center');
+    text("You finished the quiz!", 440, 300);
 
     // Buttons verwijderen als de quiz klaar is
-    for (let a of answerButtons) {
-      a.remove();
-
+    for (let a of answerButtons) { // a voor answer
+      a.remove(); // answerbuttons gaan weg
     }
 
     answerButtons = [];
   }
 }
 
+
+function preload() {
+  image1 = loadImage("Jinx&Ekko.jpg");
+  image2 = loadImage("QuizLayout.jpg");
+  image3 = loadImage("Jinx.jpg");
+  image4 = loadImage("drawing1.jpg");
+  image5 = loadImage("Jinx&Vi.jpg");
+  image6 = loadImage("butterfly1.jpg");
+
+  arcaneFont = loadFont("Arcane Nine.otf");
+}
+
 // meer vragen maken
-// comments maken
 // mooier maken
 // score maken
+// restart button maken
+
