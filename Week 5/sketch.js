@@ -5,7 +5,13 @@ let image4;
 let image5;
 let image6;
 
-let arcaneFont
+let arcaneFont;
+
+let soundEffect1;
+let soundEffect2;
+
+let sound1Played = false;
+let sound2Played = false;
 
 let menuScherm = 0;
 let button;
@@ -14,6 +20,8 @@ let answerButtons = [];
 let correctAnswer = 0;
 let currentQuestion = 0;
 let feedback = ""; // voor als je een antwoord goed of fout hebt
+
+let score = 0;
 
 let questions = [ // de vragen, antwoorden en goede antwoord
   {
@@ -81,6 +89,9 @@ function setup() {
   button.mousePressed(StartButton);
 
   menu();
+
+  soundEffect1.setVolume(0.2);
+  soundEffect2.setVolume(0.2);
 }
 
 
@@ -95,10 +106,27 @@ function StartButton() {
 function draw() {
   if (menuScherm >= 1) {
     QuizLayout(); // als de scherm naar de volgende pagina gaat komt de quizlayout te zien
+    textSize(20);
+    text("score: " + score, 200, 230);
+
+    if (!sound1Played) {
+      soundEffect1.play();
+      sound1Played = true;
+    }
+
   }
 
   if (menuScherm >= 2) {
     nextQuestion(); // deze function zit het eind scherm. Ik weet dat de naam onlogisch is
+
+    soundEffect1.stop();
+
+    if (!sound2Played) {
+      soundEffect2.play();
+      sound2Played = true;
+    }
+
+
   }
 }
 
@@ -131,19 +159,23 @@ function QuizLayout() {
     textAlign('center');
     text(questions[currentQuestion].question, 430, 160); // de text is de vraag van current vraag
     text(feedback, 450, 305); // feedback laten zien
+
+    fill(255);
+    textSize(10);
+    text("Song:  Enemy         Made by:  Imagine Dragons,  Arcane       (Arcane's theme song)", 260, 580);
   }
 }
 
 
 function makeAnswerButton() {
-  // De 4 antwoorden ophalen
+  // de 4 antwoorden ophalen
   let answers = questions[currentQuestion].answers; // de antwoorden van de current vraag van alle vragen
 
   for (let i = 0; i < answers.length; i++) {
     let answerButton = createButton(answers[i]); // de buttons van de 4 antwoorden array
     answerButton.size(150, 68);
 
-    // Positie van de buttons
+    // positie van de buttons
     let x = 205 + (i % 2) * 390;
     let y = 352 + Math.floor(i / 2) * 103;
 
@@ -152,8 +184,7 @@ function makeAnswerButton() {
     answerButton.style('color', 'white');
     answerButton.style('border', 'none');
 
-
-    // Controleren welk antwoord is aangeklikt
+    // controleren welk antwoord is aangeklikt
     answerButton.mousePressed(function () { // als je op een antwoord klikt dan checkt hij of het goed of fout is
       checkAnswer(i);
     });
@@ -166,6 +197,7 @@ function makeAnswerButton() {
 function checkAnswer(chosenAnswer) {
   if (chosenAnswer == questions[currentQuestion].correctAnswer) { // als het gekozen antwoord goed of fout is
     feedback = "Correct!";
+    score += 1;
   } else {
     feedback = "Wrong!";
   }
@@ -175,7 +207,6 @@ function checkAnswer(chosenAnswer) {
 
 
 function nextQuestion() {
-
   currentQuestion++;
 
   feedback = ""; // zonder dit blijft de feedback vastlopen
@@ -185,14 +216,20 @@ function nextQuestion() {
   } else {
     menuScherm += 1; // eind scherm komt
     background(image1);
+
+    fill(0, 0, 0, 180);
+    rect(354, 531, 180, 50);
+
+    fill(255);
     textAlign('center');
-    text("You finished the quiz!", 440, 300);
+    textSize(40);
+    text("You finished the quiz!", 440, 200);
+    text("score: " + score, 440, 570);
 
     // Buttons verwijderen als de quiz klaar is
     for (let a of answerButtons) { // a voor answer
       a.remove(); // answerbuttons gaan weg
     }
-
     answerButtons = [];
   }
 }
@@ -207,10 +244,9 @@ function preload() {
   image6 = loadImage("butterfly1.jpg");
 
   arcaneFont = loadFont("Arcane Nine.otf");
+
+  soundEffect2 = loadSound("witchstuff.mp3");
+  soundEffect1 = loadSound("enemy.mp4");
 }
 
-// meer vragen maken
-// mooier maken
-// score maken
-// restart button maken
-
+// geluidje toevoegen
