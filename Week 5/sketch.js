@@ -109,11 +109,10 @@ function draw() {
     textSize(20);
     text("score: " + score, 200, 230);
 
-    if (!sound1Played) {
+    if (!sound1Played) { 
       soundEffect1.play();
       sound1Played = true;
     }
-
   }
 
   if (menuScherm >= 2) {
@@ -121,12 +120,10 @@ function draw() {
 
     soundEffect1.stop();
 
-    if (!sound2Played) {
+    if (!sound2Played) { 
       soundEffect2.play();
       sound2Played = true;
     }
-
-
   }
 }
 
@@ -248,5 +245,3 @@ function preload() {
   soundEffect2 = loadSound("witchstuff.mp3");
   soundEffect1 = loadSound("enemy.mp4");
 }
-
-// geluidje toevoegen
