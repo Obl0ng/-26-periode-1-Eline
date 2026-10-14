@@ -13,33 +13,48 @@ let feedButton;
 let cleanButton;
 let sleepButton;
 let playButton;
+let fishInButton;
+let soapInButton;
 
 function setup() {
   createCanvas(700, 600);
 
-  feedButton = createButton("feed");
-  feedButton.size(80, 30);
-  feedButton.position(20, 50);
-  feedButton.style('background', 'white');
+  feedButton = createImg("feedButton.png", "feed");
+  feedButton.size(120, 70);
+  feedButton.position(20, 20);
+  feedButton.style('background', 'transparent');
   feedButton.mousePressed(hungerButton);
+  
 
-  cleanButton = createButton("clean");
-  cleanButton.size(80, 30);
-  cleanButton.position(20, 90);
-  cleanButton.style('background', 'white');
+  cleanButton = createImg("cleanButton.png", "clean");
+  cleanButton.size(120, 70);
+  cleanButton.position(20, 65);
+  cleanButton.style('background', 'transparent');
   cleanButton.mousePressed(cleaningButton);
 
-  sleepButton = createButton("sleep");
-  sleepButton.size(80, 30);
-  sleepButton.position(20, 130);
-  sleepButton.style('background', 'white');
+  sleepButton = createImg("sleepButton.png", "sleep");
+  sleepButton.size(120, 70);
+  sleepButton.position(20, 110);
+  sleepButton.style('background', 'transparent');
   sleepButton.mousePressed(sleepingButton);
 
-  playButton = createButton("play");
-  playButton.size(80, 30);
-  playButton.position(20, 170);
-  playButton.style('background', 'white');
+  playButton = createImg("playButton.png", "play");
+  playButton.size(120, 70);
+  playButton.position(20, 155);
+  playButton.style('background', 'transparent');
   playButton.mousePressed(happyButton);
+
+  fishInButton = createImg("fishInbutton.png");
+  fishInButton.size(120, 120);
+  fishInButton.position(565, 150);
+  fishInButton.style('background', 'transparent');
+  fishInButton.mousePressed();
+
+  soapInButton = createImg("soapInButton.png");
+  soapInButton.size(120, 120);
+  soapInButton.position(565, 150);
+  soapInButton.style('background', 'transparent');
+  soapInButton.mousePressed();
 
 }
 
@@ -47,13 +62,20 @@ function setup() {
 function mainRoom() {
 
   background(livingRoom);
-  image(cat, 240, 280, 200, 200);
+  image(cat, 240, 260, 200, 200);
+
+  fill(0, 0, 0, 180);
+  noStroke();
+  rect(550, 23, 146, 100);
 
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 25, 20, 35, 35);
-    image(energy, 550 + i * 25, 50, 35, 35);
-    image(food, 550 + i * 25, 80, 35, 35);
+    image(hearts, 550 + i * 27, 20, 40, 40);
+    image(energy, 550 + i * 27, 50, 40, 40);
+    image(food, 550 + i * 27, 80, 40, 40);
   }
+
+  fishInButton.hide();
+  soapInButton.hide();
 }
 
 
@@ -66,13 +88,24 @@ function feedingCat() {
   background(kitchen);
   image(cat, 260, 380, 200, 200);
 
+  fill(0, 0, 0, 180);
+  noStroke();
+  rect(550, 23, 146, 100);
+
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 25, 20, 35, 35);
-    image(energy, 550 + i * 25, 50, 35, 35);
-    image(food, 550 + i * 25, 80, 35, 35);
+    image(hearts, 550 + i * 27, 20, 40, 40);
+    image(energy, 550 + i * 27, 50, 40, 40);
+    image(food, 550 + i * 27, 80, 40, 40);
   }
+
+  fishInButton.show();
+  soapInButton.hide();
+
 }
 
+function feedTheCat() {
+
+}
 
 function cleaningButton() {
   rooms = 2;
@@ -81,13 +114,20 @@ function cleaningButton() {
 function cleaningCat() {
 
   background(bathroom);
-  image(cat, 280, 300, 200, 200);
+  image(cat, 450, 250, 200, 200);
+
+  fill(0, 0, 0, 180);
+  noStroke();
+  rect(550, 23, 146, 100);
 
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 25, 20, 35, 35);
-    image(energy, 550 + i * 25, 50, 35, 35);
-    image(food, 550 + i * 25, 80, 35, 35);
+    image(hearts, 550 + i * 27, 20, 40, 40);
+    image(energy, 550 + i * 27, 50, 40, 40);
+    image(food, 550 + i * 27, 80, 40, 40);
   }
+
+  fishInButton.hide();
+  soapInButton.show();
 }
 
 
@@ -100,11 +140,18 @@ function sleepingCat() {
   background(bedroom);
   image(cat, 290, 280, 200, 200);
 
+  fill(0, 0, 0, 180);
+  noStroke();
+  rect(550, 23, 146, 100);
+
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 25, 20, 35, 35);
-    image(energy, 550 + i * 25, 50, 35, 35);
-    image(food, 550 + i * 25, 80, 35, 35);
+    image(hearts, 550 + i * 27, 20, 40, 40);
+    image(energy, 550 + i * 27, 50, 40, 40);
+    image(food, 550 + i * 27, 80, 40, 40);
   }
+
+  fishInButton.hide();
+  soapInButton.hide();
 }
 
 
@@ -115,13 +162,20 @@ function happyButton() {
 function happyCat() {
 
 background(livingRoom);
-  image(cat, 240, 280, 200, 200);
+  image(cat, 240, 260, 200, 200);
+
+  fill(0, 0, 0, 180);
+  noStroke();
+  rect(550, 23, 146, 100);
 
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 25, 20, 35, 35);
-    image(energy, 550 + i * 25, 50, 35, 35);
-    image(food, 550 + i * 25, 80, 35, 35);
+    image(hearts, 550 + i * 27, 20, 40, 40);
+    image(energy, 550 + i * 27, 50, 40, 40);
+    image(food, 550 + i * 27, 80, 40, 40);
   }
+
+  fishInButton.hide();
+  soapInButton.hide();
 }
 
 
@@ -142,12 +196,12 @@ function draw() {
 
 
 function preload() {
-  livingRoom = loadImage("livingRoom.avif");
+  livingRoom = loadImage("livingroom.png");
   cat = loadImage("CuteCat4.png");
   food = loadImage("catFood2.png");
   energy = loadImage("energy2.png");
   hearts = loadImage("heartBar2.png");
-  kitchen = loadImage("kitchen.avif");
-  bathroom = loadImage("bathroom.avif");
+  kitchen = loadImage("kitchen2.png");
+  bathroom = loadImage("bathroom.png");
   bedroom = loadImage("bedroom.avif");
 }
