@@ -17,6 +17,10 @@ let fishInButton;
 let soapInButton;
 let moonInButton;
 
+let hunger = 5;
+let energie = 5;
+
+
 function setup() {
   createCanvas(700, 600);
 
@@ -25,7 +29,6 @@ function setup() {
   feedButton.position(20, 20);
   feedButton.style('background', 'transparent');
   feedButton.mousePressed(hungerButton);
-  
 
   cleanButton = createImg("cleanButton.png", "clean");
   cleanButton.size(120, 70);
@@ -49,7 +52,7 @@ function setup() {
   fishInButton.size(120, 120);
   fishInButton.position(565, 150);
   fishInButton.style('background', 'transparent');
-  fishInButton.mousePressed();
+  fishInButton.mousePressed(feedTheCat);
 
   soapInButton = createImg("soapInButton.png");
   soapInButton.size(120, 120);
@@ -61,7 +64,7 @@ function setup() {
   moonInButton.size(120, 120);
   moonInButton.position(565, 150);
   moonInButton.style('background', 'transparent');
-  moonInButton.mousePressed();
+  moonInButton.mousePressed(letTheCatSleep);
 
 }
 
@@ -77,8 +80,14 @@ function mainRoom() {
 
   for (let i = 0; i < 5; i++) {
     image(hearts, 550 + i * 27, 20, 40, 40);
-    image(energy, 550 + i * 27, 50, 40, 40);
-    image(food, 550 + i * 27, 80, 40, 40);
+
+    if (i < hunger) {
+      image(food, 550 + i * 27, 80, 40, 40);
+    }
+
+    if (i < energie) {
+      image(energy, 550 + i * 27, 50, 40, 40);
+    }
   }
 
   fishInButton.hide();
@@ -102,19 +111,27 @@ function feedingCat() {
 
   for (let i = 0; i < 5; i++) {
     image(hearts, 550 + i * 27, 20, 40, 40);
-    image(energy, 550 + i * 27, 50, 40, 40);
-    image(food, 550 + i * 27, 80, 40, 40);
+
+    if (i < hunger) {
+      image(food, 550 + i * 27, 80, 40, 40);
+    }
+
+    if (i < energie) {
+      image(energy, 550 + i * 27, 50, 40, 40);
+    }
   }
 
   fishInButton.show();
   soapInButton.hide();
   moonInButton.hide();
 
+
 }
 
 function feedTheCat() {
-
+  hunger = min(5, hunger + 2);
 }
+
 
 function cleaningButton() {
   rooms = 2;
@@ -131,13 +148,21 @@ function cleaningCat() {
 
   for (let i = 0; i < 5; i++) {
     image(hearts, 550 + i * 27, 20, 40, 40);
-    image(energy, 550 + i * 27, 50, 40, 40);
-    image(food, 550 + i * 27, 80, 40, 40);
+
+    if (i < hunger) {
+      image(food, 550 + i * 27, 80, 40, 40);
+    }
+
+    if (i < energie) {
+      image(energy, 550 + i * 27, 50, 40, 40);
+    }
   }
 
   fishInButton.hide();
   soapInButton.show();
   moonInButton.hide();
+
+
 }
 
 
@@ -156,8 +181,14 @@ function sleepingCat() {
 
   for (let i = 0; i < 5; i++) {
     image(hearts, 550 + i * 27, 20, 40, 40);
-    image(energy, 550 + i * 27, 50, 40, 40);
-    image(food, 550 + i * 27, 80, 40, 40);
+
+    if (i < hunger) {
+      image(food, 550 + i * 27, 80, 40, 40);
+    }
+
+    if (i < energie) {
+      image(energy, 550 + i * 27, 50, 40, 40);
+    }
   }
 
   fishInButton.hide();
@@ -165,14 +196,17 @@ function sleepingCat() {
   moonInButton.show();
 }
 
+function letTheCatSleep() {
+  energie = min(5, energie + 2);
+}
 
 function happyButton() {
- rooms = 4;
+  rooms = 4;
 }
 
 function happyCat() {
 
-background(livingRoom);
+  background(livingRoom);
   image(cat, 240, 260, 200, 200);
 
   fill(0, 0, 0, 180);
@@ -181,17 +215,32 @@ background(livingRoom);
 
   for (let i = 0; i < 5; i++) {
     image(hearts, 550 + i * 27, 20, 40, 40);
-    image(energy, 550 + i * 27, 50, 40, 40);
-    image(food, 550 + i * 27, 80, 40, 40);
+
+    if (i < hunger) {
+      image(food, 550 + i * 27, 80, 40, 40);
+    }
+
+    if (i < energie) {
+      image(energy, 550 + i * 27, 50, 40, 40);
+    }
   }
 
   fishInButton.hide();
   soapInButton.hide();
   moonInButton.hide();
+
 }
 
 
 function draw() {
+
+  if (frameCount % 400 === 0) {
+    hunger = max(0, hunger - 1);
+  }
+
+  if (frameCount % 300 === 0) {
+    energie = max(0, energie - 1);
+  }
 
   if (rooms == 1) {
     feedingCat();
@@ -204,6 +253,7 @@ function draw() {
   } else {
     mainRoom();
   }
+
 }
 
 
