@@ -6,6 +6,8 @@ let hearts;
 let kitchen;
 let bathroom;
 let bedroom;
+let sadCat;
+let stinkyCat;
 
 let rooms = 0;
 
@@ -19,6 +21,7 @@ let moonInButton;
 
 let hunger = 5;
 let energie = 5;
+let hygiene = 5;
 
 
 function setup() {
@@ -72,7 +75,6 @@ function setup() {
 function mainRoom() {
 
   background(livingRoom);
-  image(cat, 240, 260, 200, 200);
 
   fill(0, 0, 0, 180);
   noStroke();
@@ -90,6 +92,14 @@ function mainRoom() {
     }
   }
 
+  if (hunger <= 2) {
+    image(sadCat, 240, 260, 200, 200);
+  } else if (hygiene <= 2) {
+    image(stinkyCat, 240, 260, 200);
+  }  else {
+    image(cat, 240, 260, 200, 200);
+  }
+  
   fishInButton.hide();
   soapInButton.hide();
   moonInButton.hide();
@@ -103,7 +113,6 @@ function hungerButton() {
 function feedingCat() {
 
   background(kitchen);
-  image(cat, 260, 380, 200, 200);
 
   fill(0, 0, 0, 180);
   noStroke();
@@ -121,11 +130,15 @@ function feedingCat() {
     }
   }
 
+  if (hunger <= 2) {
+    image(sadCat, 260, 380, 200, 200);
+  } else {
+    image(cat, 260, 380, 200, 200);
+  }
+
   fishInButton.show();
   soapInButton.hide();
   moonInButton.hide();
-
-
 }
 
 function feedTheCat() {
@@ -140,7 +153,6 @@ function cleaningButton() {
 function cleaningCat() {
 
   background(bathroom);
-  image(cat, 450, 250, 200, 200);
 
   fill(0, 0, 0, 180);
   noStroke();
@@ -158,11 +170,15 @@ function cleaningCat() {
     }
   }
 
+  if (hunger <= 2) {
+    image(sadCat, 450, 250, 200, 200);
+  } else {
+    image(cat, 450, 250, 200, 200);
+  }
+
   fishInButton.hide();
   soapInButton.show();
   moonInButton.hide();
-
-
 }
 
 
@@ -173,7 +189,6 @@ function sleepingButton() {
 function sleepingCat() {
 
   background(bedroom);
-  image(cat, 290, 280, 200, 200);
 
   fill(0, 0, 0, 180);
   noStroke();
@@ -189,6 +204,12 @@ function sleepingCat() {
     if (i < energie) {
       image(energy, 550 + i * 27, 50, 40, 40);
     }
+  }
+
+  if (hunger <= 2) {
+    image(sadCat, 290, 280, 200, 200);
+  } else {
+    image(cat, 29, 280, 200, 200);
   }
 
   fishInButton.hide();
@@ -207,7 +228,6 @@ function happyButton() {
 function happyCat() {
 
   background(livingRoom);
-  image(cat, 240, 260, 200, 200);
 
   fill(0, 0, 0, 180);
   noStroke();
@@ -225,6 +245,12 @@ function happyCat() {
     }
   }
 
+  if (hunger <= 2) {
+    image(sadCat, 240, 260, 200, 200);
+  } else {
+    image(cat, 240, 260, 200, 200);
+  }
+
   fishInButton.hide();
   soapInButton.hide();
   moonInButton.hide();
@@ -234,12 +260,16 @@ function happyCat() {
 
 function draw() {
 
-  if (frameCount % 400 === 0) {
+  if (frameCount % 100 === 0) {
     hunger = max(0, hunger - 1);
   }
 
   if (frameCount % 300 === 0) {
     energie = max(0, energie - 1);
+  }
+
+  if (frameCount % 50 === 0) {
+    hygiene = max(0, hygiene - 1);
   }
 
   if (rooms == 1) {
@@ -266,4 +296,6 @@ function preload() {
   kitchen = loadImage("kitchen2.png");
   bathroom = loadImage("bathroom.png");
   bedroom = loadImage("bedroom.avif");
+  stinkyCat = loadImage("stinkyCat.png");
+  sadCat = loadImage("sadCat.png");
 }
