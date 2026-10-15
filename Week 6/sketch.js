@@ -15,6 +15,7 @@ let sleepButton;
 let playButton;
 let fishInButton;
 let soapInButton;
+let moonInButton;
 
 function setup() {
   createCanvas(700, 600);
@@ -56,6 +57,12 @@ function setup() {
   soapInButton.style('background', 'transparent');
   soapInButton.mousePressed();
 
+  moonInButton = createImg("moonInButton.png");
+  moonInButton.size(120, 120);
+  moonInButton.position(565, 150);
+  moonInButton.style('background', 'transparent');
+  moonInButton.mousePressed();
+
 }
 
 
@@ -76,6 +83,7 @@ function mainRoom() {
 
   fishInButton.hide();
   soapInButton.hide();
+  moonInButton.hide();
 }
 
 
@@ -100,6 +108,7 @@ function feedingCat() {
 
   fishInButton.show();
   soapInButton.hide();
+  moonInButton.hide();
 
 }
 
@@ -128,6 +137,7 @@ function cleaningCat() {
 
   fishInButton.hide();
   soapInButton.show();
+  moonInButton.hide();
 }
 
 
@@ -152,6 +162,7 @@ function sleepingCat() {
 
   fishInButton.hide();
   soapInButton.hide();
+  moonInButton.show();
 }
 
 
@@ -176,6 +187,7 @@ background(livingRoom);
 
   fishInButton.hide();
   soapInButton.hide();
+  moonInButton.hide();
 }
 
 
