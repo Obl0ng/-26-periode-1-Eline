@@ -1,3 +1,4 @@
+// alle variabelen van de images
 let livingRoom;
 let cat;
 let food;
@@ -13,6 +14,7 @@ let smiley;
 
 let rooms = 0;
 
+// alle buttons
 let feedButton;
 let cleanButton;
 let sleepButton;
@@ -22,11 +24,11 @@ let soapInButton;
 let moonInButton;
 let smileyInButton;
 
+// de waarden van de bars
 let hunger = 5;
 let energie = 5;
 let hygiene = 5;
 let happiness = 5;
-
 
 
 function preload() {
@@ -45,10 +47,10 @@ function preload() {
 }
 
 
-
 function setup() {
   createCanvas(700, 600);
 
+  // alle buttons van de kamers
   feedButton = createImg("feedButton.png");
   feedButton.size(120, 70);
   feedButton.position(20, 20);
@@ -73,6 +75,7 @@ function setup() {
   playButton.style('background', 'transparent');
   playButton.mousePressed(happyButton);
 
+  // alle inventory buttons
   fishInButton = createImg("fishInbutton.png");
   fishInButton.size(120, 120);
   fishInButton.position(565, 170);
@@ -97,15 +100,26 @@ function setup() {
   smileyInButton.style('background', 'transparent');
   smileyInButton.mousePressed(makeTheCatHappy);
 
+  let data = getItem("bars");
 
-  let Data = getItem("bars");
-  print("Data", Data); 
-
+  if (data !== null && data !== undefined) {
+    hunger = data.hunger;
+    energie = data.energie;
+    hygiene = data.hygiene;
+    happiness = data.happiness;
+  }
 }
 
 function saveData() {
-  storeItem("bars", hunger + energie + hygiene + happiness);
+  // alle vier de waarden slaan samen op.
+  storeItem("bars", {
+    hunger: hunger,
+    energie: energie,
+    hygiene: hygiene,
+    happiness: happiness
+  });
 }
+
 
 
 function happyButton() {
@@ -114,6 +128,7 @@ function happyButton() {
 
 function makeTheCatHappy() {
   happiness = min(5, happiness + 2);
+  saveData();
 }
 
 function happyCat() {
@@ -144,13 +159,13 @@ function happyCat() {
     }
   }
 
-   if (hygiene <= 2) {
+  if (hygiene <= 2) {
     image(stinkyCat, 240, 260, 200, 200);
   } else if (hunger <= 2) {
     image(sadCat, 240, 260, 200, 200);
   } else if (happiness <= 2) {
     image(sadCat, 240, 260, 200, 200);
-  }  else {
+  } else {
     image(cat, 240, 260, 200, 200);
   }
 
@@ -167,13 +182,14 @@ function hungerButton() {
 
 function feedTheCat() {
   hunger = min(5, hunger + 2);
+  saveData();
 }
 
 function feedingCat() {
 
   background(kitchen);
 
- fill(0, 0, 0, 180);
+  fill(0, 0, 0, 180);
   noStroke();
   rect(550, 23, 146, 155);
 
@@ -197,13 +213,13 @@ function feedingCat() {
     }
   }
 
-   if (hygiene <= 2) {
+  if (hygiene <= 2) {
     image(stinkyCat, 260, 380, 200, 200);
   } else if (hunger <= 2) {
     image(sadCat, 260, 380, 200, 200);
   } else if (happiness <= 2) {
     image(sadCat, 260, 380, 200, 200);
-  }  else {
+  } else {
     image(cat, 260, 380, 200, 200);
   }
 
@@ -219,7 +235,8 @@ function cleaningButton() {
 }
 
 function cleanTheCat() {
-hygiene = min(5, hygiene + 2);
+  hygiene = min(5, hygiene + 2);
+  saveData();
 }
 
 function cleaningCat() {
@@ -250,13 +267,13 @@ function cleaningCat() {
     }
   }
 
-   if (hygiene <= 2) {
+  if (hygiene <= 2) {
     image(stinkyCat, 450, 250, 200, 200);
   } else if (hunger <= 2) {
     image(sadCat, 450, 250, 200, 200);
   } else if (happiness <= 2) {
     image(sadCat, 450, 250, 200, 200);
-  }  else {
+  } else {
     image(cat, 450, 250, 200, 200);
   }
 
@@ -273,6 +290,7 @@ function sleepingButton() {
 
 function letTheCatSleep() {
   energie = min(5, energie + 2);
+  saveData();
 }
 
 function sleepingCat() {
@@ -303,13 +321,13 @@ function sleepingCat() {
     }
   }
 
-   if (hygiene <= 2) {
+  if (hygiene <= 2) {
     image(stinkyCat, 290, 280, 200, 200);
   } else if (hunger <= 2) {
     image(sadCat, 290, 280, 200, 200);
   } else if (happiness <= 2) {
     image(sadCat, 290, 280, 200, 200);
-  }  else {
+  } else {
     image(cat, 290, 280, 200, 200);
   }
 
@@ -324,18 +342,22 @@ function draw() {
 
   if (frameCount % 500 === 0) {
     hunger = max(0, hunger - 1);
+    saveData();
   }
 
   if (frameCount % 1500 === 0) {
     energie = max(0, energie - 1);
+    saveData();
   }
 
   if (frameCount % 900 === 0) {
     hygiene = max(0, hygiene - 1);
+    saveData();
   }
 
   if (frameCount % 1200 === 0) {
     happiness = max(0, happiness - 1);
+    saveData();
   }
 
   if (rooms == 1) {
