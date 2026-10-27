@@ -13,6 +13,7 @@ let soap;
 let smiley;
 
 let rooms = 0;
+let lastHeart = 0;
 
 // alle buttons
 let feedButton;
@@ -29,6 +30,7 @@ let hunger = 5;
 let energie = 5;
 let hygiene = 5;
 let happiness = 5;
+let hartjes = 5;
 
 
 function preload() {
@@ -107,6 +109,7 @@ function setup() {
     energie = data.energie;
     hygiene = data.hygiene;
     happiness = data.happiness;
+    hartjes = data.hartjes;
   }
 }
 
@@ -116,10 +119,10 @@ function saveData() {
     hunger: hunger,
     energie: energie,
     hygiene: hygiene,
-    happiness: happiness
+    happiness: happiness,
+    hartjes: hartjes
   });
 }
-
 
 
 function happyButton() {
@@ -140,7 +143,10 @@ function happyCat() {
   rect(550, 23, 146, 155);
 
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 27, 20, 40, 40);
+
+    if (i < hartjes) {
+      image(hearts, 550 + i * 27, 20, 40, 40);
+    }
 
     if (i < hunger) {
       image(food, 550 + i * 27, 80, 40, 40);
@@ -158,6 +164,7 @@ function happyCat() {
       image(smiley, 550 + i * 27, 140, 40, 40);
     }
   }
+
 
   if (hygiene <= 2) {
     image(stinkyCat, 240, 260, 200, 200);
@@ -182,8 +189,15 @@ function hungerButton() {
 
 function feedTheCat() {
   hunger = min(5, hunger + 2);
+
+  if (hunger > 0) {
+    hartjes = min(5, hartjes + 1);
+    lastHeart = 0;
+  }
+
   saveData();
 }
+
 
 function feedingCat() {
 
@@ -194,7 +208,10 @@ function feedingCat() {
   rect(550, 23, 146, 155);
 
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 27, 20, 40, 40);
+
+    if (i < hartjes) {
+      image(hearts, 550 + i * 27, 20, 40, 40);
+    }
 
     if (i < hunger) {
       image(food, 550 + i * 27, 80, 40, 40);
@@ -248,7 +265,10 @@ function cleaningCat() {
   rect(550, 23, 146, 155);
 
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 27, 20, 40, 40);
+
+    if (i < hartjes) {
+      image(hearts, 550 + i * 27, 20, 40, 40);
+    }
 
     if (i < hunger) {
       image(food, 550 + i * 27, 80, 40, 40);
@@ -302,7 +322,10 @@ function sleepingCat() {
   rect(550, 23, 146, 155);
 
   for (let i = 0; i < 5; i++) {
-    image(hearts, 550 + i * 27, 20, 40, 40);
+
+    if (i < hartjes) {
+      image(hearts, 550 + i * 27, 20, 40, 40);
+    }
 
     if (i < hunger) {
       image(food, 550 + i * 27, 80, 40, 40);
@@ -340,7 +363,7 @@ function sleepingCat() {
 
 function draw() {
 
-  if (frameCount % 500 === 0) {
+  if (frameCount % 100 === 0) {
     hunger = max(0, hunger - 1);
     saveData();
   }
@@ -358,6 +381,23 @@ function draw() {
   if (frameCount % 1200 === 0) {
     happiness = max(0, happiness - 1);
     saveData();
+  }
+
+  if (hunger === 0 && hartjes > 0) {
+    if (lastHeart === 0) {
+      lastHeart = frameCount;
+    }
+
+    if (frameCount - lastHeart >= 200) {
+      hartjes = hartjes - 1;
+      lastHeart = frameCount;
+      saveData();
+    }
+  }
+
+  // Als de kat weer eten heeft, stopt het aftellen.
+  if (hunger > 0) {
+    lastHeart = 0;
   }
 
   if (rooms == 1) {
