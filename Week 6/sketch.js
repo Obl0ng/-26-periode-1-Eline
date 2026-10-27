@@ -12,6 +12,8 @@ let stinkyCat;
 let soap;
 let smiley;
 
+let cozyMusic;
+
 let rooms = 0;
 let lastHeart = 0;
 
@@ -46,11 +48,18 @@ function preload() {
   sadCat = loadImage("sadCat.png");
   soap = loadImage("soap.png");
   smiley = loadImage("smiley.png");
+ 
+  cozyMusic = loadSound("cozyMusic.mp3");
+
 }
 
 
 function setup() {
   createCanvas(700, 600);
+
+  userStartAudio();
+  cozyMusic.setVolume(0.5)
+  cozyMusic.loop();
 
   // alle buttons van de kamers
   feedButton = createImg("feedButton.png");
@@ -102,6 +111,12 @@ function setup() {
   smileyInButton.style('background', 'transparent');
   smileyInButton.mousePressed(makeTheCatHappy);
 
+  restartButton = createButton("restart");
+  restartButton.size(300, 100);
+  restartButton.position(180, 300);
+  restartButton.style('background', 'white');
+  restartButton.mousePressed(opnieuwButton);
+
   let data = getItem("bars");
 
   if (data !== null && data !== undefined) {
@@ -111,6 +126,8 @@ function setup() {
     happiness = data.happiness;
     hartjes = data.hartjes;
   }
+
+ 
 }
 
 function saveData() {
@@ -165,7 +182,6 @@ function happyCat() {
     }
   }
 
-
   if (hygiene <= 2) {
     image(stinkyCat, 240, 260, 200, 200);
   } else if (hunger <= 2) {
@@ -180,6 +196,7 @@ function happyCat() {
   soapInButton.hide();
   moonInButton.hide();
   smileyInButton.show();
+  restartButton.hide();
 }
 
 
@@ -194,7 +211,6 @@ function feedTheCat() {
     hartjes = min(5, hartjes + 1);
     lastHeart = 0;
   }
-
   saveData();
 }
 
@@ -244,6 +260,7 @@ function feedingCat() {
   soapInButton.hide();
   moonInButton.hide();
   smileyInButton.hide();
+  restartButton.hide();
 }
 
 
@@ -301,6 +318,7 @@ function cleaningCat() {
   soapInButton.show();
   moonInButton.hide();
   smileyInButton.hide();
+  restartButton.hide();
 }
 
 
@@ -358,6 +376,43 @@ function sleepingCat() {
   soapInButton.hide();
   moonInButton.show();
   smileyInButton.hide();
+  restartButton.hide();
+}
+
+function deadCat() {
+
+  background(227, 115, 175);
+
+  fishInButton.hide();
+  soapInButton.hide();
+  moonInButton.hide();
+  smileyInButton.hide();
+  feedButton.hide();
+  cleanButton.hide();
+  sleepButton.hide();
+  playButton.hide();
+  restartButton.show();
+
+}
+
+function opnieuwButton() {
+  hunger = 5;
+  energie = 5;
+  hygiene = 5;
+  happiness = 5;
+  hartjes = 5;
+
+  rooms = 4;
+
+  lastHeart = 0;
+
+  clearStorage();
+
+  feedButton.show();
+  cleanButton.show();
+  sleepButton.show();
+  playButton.show();
+  restartButton.hide();
 }
 
 
@@ -400,6 +455,10 @@ function draw() {
     lastHeart = 0;
   }
 
+  if (hartjes == 0) {
+    rooms = 5;
+  }
+
   if (rooms == 1) {
     feedingCat();
   } else if (rooms == 2) {
@@ -408,6 +467,8 @@ function draw() {
     sleepingCat();
   } else if (rooms == 4) {
     happyCat();
+  } else if (rooms == 5) {
+    deadCat();
   } else {
     happyCat();
   }
