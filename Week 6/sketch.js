@@ -14,6 +14,7 @@ let smiley;
 
 let cozyMusic;
 let font;
+let buttonClick;
 
 let rooms = 0;
 let lastHeart = 0;
@@ -52,6 +53,8 @@ function preload() {
 
   cozyMusic = loadSound("cozyMusic.mp3");
   font = loadFont("Cute Cat.otf");
+  buttonClick = loadSound("buttonClick.mp3");
+
 }
 
 
@@ -67,56 +70,83 @@ function setup() {
   feedButton.size(120, 70);
   feedButton.position(20, 20);
   feedButton.style('background', 'transparent');
-  feedButton.mousePressed(hungerButton);
+  feedButton.mousePressed(() => {
+    hungerButton();
+    buttonClick.play();
+  });
 
   cleanButton = createImg("cleanButton.png");
   cleanButton.size(120, 70);
   cleanButton.position(20, 65);
   cleanButton.style('background', 'transparent');
-  cleanButton.mousePressed(cleaningButton);
+  cleanButton.mousePressed(() => {
+    cleaningButton();
+    buttonClick.play();
+  });
 
   sleepButton = createImg("sleepButton.png");
   sleepButton.size(120, 70);
   sleepButton.position(20, 110);
   sleepButton.style('background', 'transparent');
-  sleepButton.mousePressed(sleepingButton);
+  sleepButton.mousePressed(() => {
+    sleepingButton();
+    buttonClick.play();
+  });
 
   playButton = createImg("playButton.png");
   playButton.size(120, 70);
   playButton.position(20, 155);
   playButton.style('background', 'transparent');
-  playButton.mousePressed(happyButton);
+  playButton.mousePressed(() => {
+    happyButton();
+    buttonClick.play();
+  });
 
   // alle inventory buttons
   fishInButton = createImg("fishInbutton.png");
   fishInButton.size(120, 120);
   fishInButton.position(565, 170);
   fishInButton.style('background', 'transparent');
-  fishInButton.mousePressed(feedTheCat);
+  fishInButton.mousePressed(() => {
+    feedTheCat();
+    buttonClick.play();
+  });
 
   soapInButton = createImg("soapInButton.png");
   soapInButton.size(120, 120);
   soapInButton.position(565, 170);
   soapInButton.style('background', 'transparent');
-  soapInButton.mousePressed(cleanTheCat);
+  soapInButton.mousePressed(() => {
+    cleanTheCat();
+    buttonClick.play();
+  });
 
   moonInButton = createImg("moonInButton.png");
   moonInButton.size(120, 120);
   moonInButton.position(565, 170);
   moonInButton.style('background', 'transparent');
-  moonInButton.mousePressed(letTheCatSleep);
+  moonInButton.mousePressed(() => {
+    letTheCatSleep();
+    buttonClick.play();
+  });
 
   smileyInButton = createImg("smileyInButton.png");
   smileyInButton.size(120, 120);
   smileyInButton.position(565, 170);
   smileyInButton.style('background', 'transparent');
-  smileyInButton.mousePressed(makeTheCatHappy);
+  smileyInButton.mousePressed(() => {
+    makeTheCatHappy();
+    buttonClick.play();
+  });
 
   restartButton = createButton("restart");
   restartButton.size(300, 100);
   restartButton.position(180, 370);
   restartButton.style('background', 'white');
-  restartButton.mousePressed(opnieuwButton);
+  restartButton.mousePressed(() => { 
+    opnieuwButton();
+    buttonClick.play();
+  });
 
   let data = getItem("bars");
 
@@ -127,7 +157,6 @@ function setup() {
     happiness = data.happiness;
     hartjes = data.hartjes;
   }
-
 
 }
 
