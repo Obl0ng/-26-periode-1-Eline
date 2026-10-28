@@ -13,6 +13,7 @@ let soap;
 let smiley;
 
 let cozyMusic;
+let font;
 
 let rooms = 0;
 let lastHeart = 0;
@@ -48,9 +49,9 @@ function preload() {
   sadCat = loadImage("sadCat.png");
   soap = loadImage("soap.png");
   smiley = loadImage("smiley.png");
- 
-  cozyMusic = loadSound("cozyMusic.mp3");
 
+  cozyMusic = loadSound("cozyMusic.mp3");
+  font = loadFont("Cute Cat.otf");
 }
 
 
@@ -113,7 +114,7 @@ function setup() {
 
   restartButton = createButton("restart");
   restartButton.size(300, 100);
-  restartButton.position(180, 300);
+  restartButton.position(180, 370);
   restartButton.style('background', 'white');
   restartButton.mousePressed(opnieuwButton);
 
@@ -127,7 +128,7 @@ function setup() {
     hartjes = data.hartjes;
   }
 
- 
+
 }
 
 function saveData() {
@@ -418,7 +419,7 @@ function opnieuwButton() {
 
 function draw() {
 
-  if (frameCount % 100 === 0) {
+  if (frameCount % 500 === 0) {
     hunger = max(0, hunger - 1);
     saveData();
   }
@@ -469,8 +470,11 @@ function draw() {
     happyCat();
   } else if (rooms == 5) {
     deadCat();
+    fill(255);
+    textSize(70);
+    textFont(font);
+    text("you died", 220, 250);
   } else {
     happyCat();
   }
 }
-
