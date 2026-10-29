@@ -1,4 +1,4 @@
-// alle variabelen van de images
+// alle variabelen voor de afbeeldingen van de kamers en de kat
 let livingRoom;
 let cat;
 let food;
@@ -11,23 +11,33 @@ let sadCat;
 let stinkyCat;
 let soap;
 let smiley;
+let hangingPlant;
 
+// muziek, font en soundeffect
 let cozyMusic;
 let font;
 let buttonClick;
 
+// laat zien welke kamer of welk scherm wordt weergegeven
 let rooms = 0;
+
+// laat zien wanneer het aftellen van de hartjes voor het laatst is gestart
 let lastHeart = 0;
 
-// alle buttons
+// kamer knoppen
 let feedButton;
 let cleanButton;
 let sleepButton;
 let playButton;
+
+// inventory knoppen
 let fishInButton;
 let soapInButton;
 let moonInButton;
 let smileyInButton;
+
+// restartknop
+let restartButton;
 
 // de waarden van de bars
 let hunger = 5;
@@ -36,8 +46,17 @@ let hygiene = 5;
 let happiness = 5;
 let hartjes = 5;
 
+// de beginposities van de smileys in de minigame
+let smileyX = [100, 300, 600, 400];
+let smileyY = [200, 400, 300, 10];
+
+let sleepSmiley = -1;
+let smileyWeg = [false, false, false, false];
+
 
 function preload() {
+
+  // de afbeeldingen van de kamers en de kat
   livingRoom = loadImage("livingroom.png");
   cat = loadImage("CuteCat4.png");
   food = loadImage("catFood2.png");
@@ -50,28 +69,33 @@ function preload() {
   sadCat = loadImage("sadCat.png");
   soap = loadImage("soap.png");
   smiley = loadImage("smiley.png");
+  hangingPlant = loadImage("hangingPlant.png");
 
+  // de achtergrondmuziek, het lettertype en het klikgeluid
   cozyMusic = loadSound("cozyMusic.mp3");
   font = loadFont("Cute Cat.otf");
-  buttonClick = loadSound("buttonClick.mp3");
-
+  buttonClick = loadSound("buttonClick.mp3"); // als je op knopje klikt hoor je een geluidje
 }
 
 
 function setup() {
   createCanvas(700, 600);
 
+  // audio aanzetten
   userStartAudio();
-  cozyMusic.setVolume(0.5)
+  cozyMusic.setVolume(0.5);
   cozyMusic.loop();
 
-  // alle buttons van de kamers
+
+  // KNOPPEN VOOR ALLE KAMERS
+
+
   feedButton = createImg("feedButton.png");
   feedButton.size(120, 70);
   feedButton.position(20, 20);
   feedButton.style('background', 'transparent');
   feedButton.mousePressed(() => {
-    hungerButton();
+    hungerButton(); // room gaat naar keuken
     buttonClick.play();
   });
 
@@ -80,7 +104,7 @@ function setup() {
   cleanButton.position(20, 65);
   cleanButton.style('background', 'transparent');
   cleanButton.mousePressed(() => {
-    cleaningButton();
+    cleaningButton(); // room gaat naar badkamer
     buttonClick.play();
   });
 
@@ -89,7 +113,7 @@ function setup() {
   sleepButton.position(20, 110);
   sleepButton.style('background', 'transparent');
   sleepButton.mousePressed(() => {
-    sleepingButton();
+    sleepingButton(); // room gaat naar slaapkamer
     buttonClick.play();
   });
 
@@ -98,17 +122,20 @@ function setup() {
   playButton.position(20, 155);
   playButton.style('background', 'transparent');
   playButton.mousePressed(() => {
-    happyButton();
+    happyButton(); // room gaat naar woonkamer
     buttonClick.play();
   });
 
-  // alle inventory buttons
+
+  // KNOPPEN VOOR DE INVENTORY
+
+
   fishInButton = createImg("fishInbutton.png");
   fishInButton.size(120, 120);
   fishInButton.position(565, 170);
   fishInButton.style('background', 'transparent');
   fishInButton.mousePressed(() => {
-    feedTheCat();
+    feedTheCat(); // kat krijgt eten
     buttonClick.play();
   });
 
@@ -117,7 +144,7 @@ function setup() {
   soapInButton.position(565, 170);
   soapInButton.style('background', 'transparent');
   soapInButton.mousePressed(() => {
-    cleanTheCat();
+    cleanTheCat(); // kat wordt schoon gemaakt
     buttonClick.play();
   });
 
@@ -126,7 +153,7 @@ function setup() {
   moonInButton.position(565, 170);
   moonInButton.style('background', 'transparent');
   moonInButton.mousePressed(() => {
-    letTheCatSleep();
+    letTheCatSleep(); // kat krijgt meer energie
     buttonClick.play();
   });
 
@@ -135,33 +162,36 @@ function setup() {
   smileyInButton.position(565, 170);
   smileyInButton.style('background', 'transparent');
   smileyInButton.mousePressed(() => {
-    makeTheCatHappy();
+    goToMinigame(); // minigame wordt geopend
     buttonClick.play();
   });
 
-  restartButton = createButton("restart");
-  restartButton.size(300, 100);
-  restartButton.position(180, 370);
-  restartButton.style('background', 'white');
-  restartButton.mousePressed(() => { 
-    opnieuwButton();
+  restartButton = createImg("restartButton.png");
+  restartButton.size(400, 230);
+  restartButton.position(140, 320);
+  restartButton.style('background', 'transparent');
+  restartButton.mousePressed(() => {
+    opnieuwButton(); // je restart de game
     buttonClick.play();
   });
 
+
+  // Controleren of er eerder opgeslagen gegevens bestaan
   let data = getItem("bars");
 
-  if (data !== null && data !== undefined) {
+
+  if (data !== null && data !== undefined) { // als er nog geen data is wordt verkeerde data niet geopend
     hunger = data.hunger;
     energie = data.energie;
     hygiene = data.hygiene;
     happiness = data.happiness;
     hartjes = data.hartjes;
   }
-
 }
 
 function saveData() {
-  // alle vier de waarden slaan samen op.
+
+  // allee waarden opslaan onder de naam "bars"
   storeItem("bars", {
     hunger: hunger,
     energie: energie,
@@ -172,23 +202,20 @@ function saveData() {
 }
 
 
+// room gaat naar woonkamer
 function happyButton() {
   rooms = 4;
 }
 
-function makeTheCatHappy() {
-  happiness = min(5, happiness + 2);
-  saveData();
-}
-
+// de woonkamer
 function happyCat() {
-
   background(livingRoom);
 
   fill(0, 0, 0, 180);
   noStroke();
   rect(550, 23, 146, 155);
 
+  // alle bars
   for (let i = 0; i < 5; i++) {
 
     if (i < hartjes) {
@@ -213,40 +240,49 @@ function happyCat() {
   }
 
   if (hygiene <= 2) {
-    image(stinkyCat, 240, 260, 200, 200);
+    image(stinkyCat, 240, 260, 200, 200); // als hygiene lager is dan 2 kat ziet er vies uit
   } else if (hunger <= 2) {
-    image(sadCat, 240, 260, 200, 200);
+    image(sadCat, 240, 260, 200, 200); // als hunger lager is dan 2 is kat verdrietig 
   } else if (happiness <= 2) {
-    image(sadCat, 240, 260, 200, 200);
+    image(sadCat, 240, 260, 200, 200); // als happiness lager is dan 2 is kan verdrietig
   } else {
     image(cat, 240, 260, 200, 200);
   }
 
+
+  // knoppen laten zien die gezien moeten worden
+  feedButton.show();
+  cleanButton.show();
+  sleepButton.show();
+  playButton.show();
+  smileyInButton.show();
+
+  // knoppen niet laten zien
   fishInButton.hide();
   soapInButton.hide();
   moonInButton.hide();
-  smileyInButton.show();
   restartButton.hide();
 }
 
 
+// room gaat naar keuken
 function hungerButton() {
   rooms = 1;
 }
 
 function feedTheCat() {
-  hunger = min(5, hunger + 2);
 
-  if (hunger > 0) {
+  hunger = min(5, hunger + 2); // als je op knopje klikt gaat zijn hunger bar omhoog
+
+  if (hunger > 0) { // als de hunger bar hoger dan 0 is krijgt hij ook weer een hartje 
     hartjes = min(5, hartjes + 1);
     lastHeart = 0;
   }
   saveData();
 }
 
-
+// keuken
 function feedingCat() {
-
   background(kitchen);
 
   fill(0, 0, 0, 180);
@@ -254,23 +290,18 @@ function feedingCat() {
   rect(550, 23, 146, 155);
 
   for (let i = 0; i < 5; i++) {
-
     if (i < hartjes) {
       image(hearts, 550 + i * 27, 20, 40, 40);
     }
-
     if (i < hunger) {
       image(food, 550 + i * 27, 80, 40, 40);
     }
-
     if (i < energie) {
       image(energy, 550 + i * 27, 50, 40, 40);
     }
-
     if (i < hygiene) {
       image(soap, 540 + i * 27, 100, 60, 60);
     }
-
     if (i < happiness) {
       image(smiley, 550 + i * 27, 140, 40, 40);
     }
@@ -294,6 +325,7 @@ function feedingCat() {
 }
 
 
+// room gaat naar badkamer
 function cleaningButton() {
   rooms = 2;
 }
@@ -303,8 +335,8 @@ function cleanTheCat() {
   saveData();
 }
 
+// de badkamer
 function cleaningCat() {
-
   background(bathroom);
 
   fill(0, 0, 0, 180);
@@ -312,23 +344,18 @@ function cleaningCat() {
   rect(550, 23, 146, 155);
 
   for (let i = 0; i < 5; i++) {
-
     if (i < hartjes) {
       image(hearts, 550 + i * 27, 20, 40, 40);
     }
-
     if (i < hunger) {
       image(food, 550 + i * 27, 80, 40, 40);
     }
-
     if (i < energie) {
       image(energy, 550 + i * 27, 50, 40, 40);
     }
-
     if (i < hygiene) {
       image(soap, 540 + i * 27, 100, 60, 60);
     }
-
     if (i < happiness) {
       image(smiley, 550 + i * 27, 140, 40, 40);
     }
@@ -344,14 +371,15 @@ function cleaningCat() {
     image(cat, 450, 250, 200, 200);
   }
 
-  fishInButton.hide();
   soapInButton.show();
+  fishInButton.hide();
   moonInButton.hide();
   smileyInButton.hide();
   restartButton.hide();
 }
 
 
+// room gaat naar slaapkamer
 function sleepingButton() {
   rooms = 3;
 }
@@ -361,8 +389,8 @@ function letTheCatSleep() {
   saveData();
 }
 
+// de slaapkamer
 function sleepingCat() {
-
   background(bedroom);
 
   fill(0, 0, 0, 180);
@@ -370,23 +398,18 @@ function sleepingCat() {
   rect(550, 23, 146, 155);
 
   for (let i = 0; i < 5; i++) {
-
     if (i < hartjes) {
       image(hearts, 550 + i * 27, 20, 40, 40);
     }
-
     if (i < hunger) {
       image(food, 550 + i * 27, 80, 40, 40);
     }
-
     if (i < energie) {
       image(energy, 550 + i * 27, 50, 40, 40);
     }
-
     if (i < hygiene) {
       image(soap, 540 + i * 27, 100, 60, 60);
     }
-
     if (i < happiness) {
       image(smiley, 550 + i * 27, 140, 40, 40);
     }
@@ -402,16 +425,143 @@ function sleepingCat() {
     image(cat, 290, 280, 200, 200);
   }
 
+  moonInButton.show();
   fishInButton.hide();
   soapInButton.hide();
-  moonInButton.show();
   smileyInButton.hide();
   restartButton.hide();
 }
 
-function deadCat() {
 
-  background(227, 115, 175);
+// room gaat naar minigame
+function goToMinigame() {
+  rooms = 6;
+}
+
+// de minigame
+function minigame() {
+  background(177, 218, 255);
+
+  fill(0);
+  circle(330, 200, 100);
+
+  // alle smileys tekenen
+  for (let i = 0; i < smileyX.length; i++) {
+
+    // alleen smileys tekenen die nog niet in de cirkel zitten
+    if (!smileyWeg[i]) {
+      image(smiley, smileyX[i], smileyY[i], 70, 70);
+    }
+  }
+
+  fishInButton.hide();
+  soapInButton.hide();
+  moonInButton.hide();
+  smileyInButton.hide();
+
+  feedButton.hide();
+  cleanButton.hide();
+  sleepButton.hide();
+  playButton.hide();
+  restartButton.hide();
+}
+
+function mousePressed() {
+
+  // alleen reageren op muisklikken als de minigame actief is
+  if (rooms != 6) return;
+
+  // kijken of je op een smiley hebt geklikt
+  for (let i = 0; i < smileyX.length; i++) {
+
+    // smileys die al geplaatst zijn overslaan
+    if (smileyWeg[i]) continue;
+
+    // kijken of de muis op de smiley staat
+    if (
+      mouseX > smileyX[i] &&
+      mouseX < smileyX[i] + 70 &&
+      mouseY > smileyY[i] &&
+      mouseY < smileyY[i] + 70
+    ) {
+
+      // kijken of de smiley wordt vastgehouden
+      sleepSmiley = i;
+
+      // stoppen met kijken of de knopje wordt vastgehouden
+      break;
+    }
+  }
+}
+
+// wanneer de muis wordt versleept
+function mouseDragged() {
+
+  // alleen een smiley verplaatsen als er een geselecteerd is
+  if (sleepSmiley != -1) {
+
+    // de x-pos van de geselecteerde smiley aanpassen
+    // door de 35 blijft de muis in het midden
+    smileyX[sleepSmiley] = mouseX - 35;
+
+    // de y-pos van de geselecteerde smiley aanpassen
+    smileyY[sleepSmiley] = mouseY - 35;
+  }
+}
+
+// wanneer de muisknop wordt losgelaten
+function mouseReleased() {
+
+  // stoppen als er geen smiley wordt vastgehouden
+  if (sleepSmiley == -1) return;
+
+  // het middelpunt van de geselecteerde smiley berekenen
+  let x = smileyX[sleepSmiley] + 35;
+  let y = smileyY[sleepSmiley] + 35;
+
+  // kijken of de smiley in de zwarte cirkel zit
+  if (dist(x, y, 330, 200) < 50) { // dist berekent de afstand tussen twee punten
+
+    // de smiley zit in de cirkel
+    smileyWeg[sleepSmiley] = true;
+  }
+
+  // de smiley wordt niet meer vastgehouden
+  sleepSmiley = -1;
+
+  // kijken of alle smileys in de cirkel zijn geplaatst
+  // every controleert of alle waarden in de array true zijn
+  if (smileyWeg.every(w => w)) {
+    happiness = 5;
+    saveData();
+
+    // terug naar woonkamer
+    rooms = 4;
+
+    // de minigame opnieuw maken voor een volgende keer
+    smileyWeg = [false, false, false, false];
+    smileyX = [100, 300, 600, 400];
+    smileyY = [200, 400, 300, 10];
+  }
+}
+
+
+// als de kat dood is
+function deadCat() {
+  background(250, 145, 190);
+
+  // leuke plantje
+  for (let i = 0; i < 4; i++) {
+    image(hangingPlant, -15 + i * 180, -10, 200, 200);
+  }
+
+  fill(255); 
+  textSize(70); 
+  textFont(font); 
+  stroke(194, 83, 130); 
+  strokeWeight(10); 
+  text("YOU DIED", 200, 280);
+
 
   fishInButton.hide();
   soapInButton.hide();
@@ -422,10 +572,11 @@ function deadCat() {
   sleepButton.hide();
   playButton.hide();
   restartButton.show();
-
 }
 
 function opnieuwButton() {
+
+  // alles terugzetten naar 5
   hunger = 5;
   energie = 5;
   hygiene = 5;
@@ -436,6 +587,7 @@ function opnieuwButton() {
 
   lastHeart = 0;
 
+  // alle data verwijderen
   clearStorage();
 
   feedButton.show();
@@ -448,8 +600,9 @@ function opnieuwButton() {
 
 function draw() {
 
+  // iedere 500 frames neemt de honger met 1 punt af
   if (frameCount % 500 === 0) {
-    hunger = max(0, hunger - 1);
+    hunger = max(0, hunger - 1); // max zorgt ervoor dat de waarde nooit lager dan 0 wordt
     saveData();
   }
 
@@ -468,41 +621,46 @@ function draw() {
     saveData();
   }
 
+  // kijken of de kat geen hongerpunten en nog wel hartjes heeft
   if (hunger === 0 && hartjes > 0) {
+
+    // het startmoment van het aftellen vastleggen
     if (lastHeart === 0) {
       lastHeart = frameCount;
     }
 
+    // controleren of er minstens 200 frames zijn verstreken
     if (frameCount - lastHeart >= 200) {
       hartjes = hartjes - 1;
+
+      // hett startmoment opnieuw instellen voor het volgende hartje
       lastHeart = frameCount;
       saveData();
     }
   }
 
-  // Als de kat weer eten heeft, stopt het aftellen.
+  // als de kat weer eten heeft stopt het naar beneden gaan
   if (hunger > 0) {
     lastHeart = 0;
   }
 
+  // als er geen hartjes meer zijn zie je de restart room
   if (hartjes == 0) {
     rooms = 5;
   }
 
   if (rooms == 1) {
-    feedingCat();
+    feedingCat(); 
   } else if (rooms == 2) {
-    cleaningCat();
+    cleaningCat(); 
   } else if (rooms == 3) {
     sleepingCat();
   } else if (rooms == 4) {
     happyCat();
   } else if (rooms == 5) {
     deadCat();
-    fill(255);
-    textSize(70);
-    textFont(font);
-    text("you died", 220, 250);
+  } else if (rooms == 6) {
+    minigame();
   } else {
     happyCat();
   }
